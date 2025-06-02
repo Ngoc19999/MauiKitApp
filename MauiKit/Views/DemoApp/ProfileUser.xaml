@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiKit.Views.DemoApp.ProfileUser"
+             xmlns:controls="clr-namespace:MauiKit.Controls"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
+             xmlns:localization="clr-namespace:MauiKit.Resources.Translations"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             BackgroundColor="{DynamicResource BasePageColor}"    
+             NavigationPage.HasBackButton="False" 
+             Title="ProfileUser">
+    <Grid RowDefinitions="Auto, *, Auto">
+
+        <!--Background Image-->
+        <Image Grid.Row="1"
+           Aspect="Fill"
+           Opacity="0.5"
+           Source="bg_purple.png" />
+
+        <!-- Gradient Mask -->
+        <Grid Grid.Row="1">
+            <Grid.Background>
+                <LinearGradientBrush>
+                    <GradientStop Offset="0.1" Color="{DynamicResource LightGreen}" />
+                    <GradientStop Offset="1.0" Color="{DynamicResource LightGreen}" />
+                </LinearGradientBrush>
+            </Grid.Background>
+
+            <!-- Logo và Label bên trong Gradient Mask -->
+            <Grid VerticalOptions="Center" HorizontalOptions="Center">
+                <Border
+                Margin="0,-600,0,0"
+                Padding="0"
+                Background="{DynamicResource PrimaryColor}"
+                HeightRequest="80"
+                WidthRequest="80"
+                Shadow="{StaticResource CommonShadow}"
+                StrokeShape="{RoundRectangle CornerRadius=16}">
+
+                    <controls:RoundedCornerImage
+                    Background="{DynamicResource White}"
+                    HeightRequest="60"
+                    WidthRequest="60"
+                    Source="logo.png"
+                    Stroke="{DynamicResource PrimaryColor}"
+                    StrokeShape="{RoundRectangle CornerRadius=30}"
+                    StrokeThickness="1"
+                    VerticalOptions="Center" />
+                </Border>
+
+                <Label                   
+                FontFamily="BoldFont"
+                FontSize="25"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                Style="{StaticResource Title1}"
+                Text="Thông Tin Người Dùng"
+                TextColor="{DynamicResource PrimaryColor}"
+                Margin="0,-230,0,0" />
+            </Grid>
+            <Grid Grid.Row="1" ColumnDefinitions="{OnIdiom Desktop='1*, 8*, 1*', Phone='Auto, *, Auto', Tablet='1*, 8*, 1*', Default='Auto, *, Auto'}">
+                <StackLayout
+                            Grid.Column="1"
+                            Padding="30,0,30,20"
+                            HorizontalOptions="Fill"
+                            Spacing="15"                  
+                            VerticalOptions="Center"
+                            
+     >
+                    <Label Text="Họ và Tên"
+                           FontSize="15"
+                           TextColor="{DynamicResource White}"
+                           Margin="10,20,0,0"
+                           HorizontalTextAlignment="Start" />
+                   
+                    <Frame CornerRadius="22" Padding="0">
+                        <Label
+                             Text="{Binding HoTen}"
+                             BackgroundColor="LightGray"
+                             FontSize="18"
+                             HeightRequest="50"
+                             VerticalTextAlignment="Center"
+                             HorizontalTextAlignment="Start"
+                             TextColor="{DynamicResource Black}" />
+                    </Frame>
+
+                    <Label Text="Số điện thoại"
+                           FontSize="15"
+                           TextColor="{DynamicResource White}"
+                           Margin="10,0,0,0"
+                           HorizontalTextAlignment="Start" />
+                    <Frame CornerRadius="22" Padding="0">
+                        <Label
+                            
+                            BackgroundColor="LightGray"                                            
+                            FontFamily="MediumFont"
+                            FontSize="18"
+                            HeightRequest="50"    
+                            Text="{Binding Phone}"  
+                            VerticalTextAlignment="Center"
+                            HorizontalTextAlignment="Start"                            
+                            TextColor="{DynamicResource Black}" />
+                    </Frame>
+
+                    <Label Text="Email"
+                           FontSize="15"
+                           TextColor="{DynamicResource White}"
+                           Margin="10,0,0,0"
+                           HorizontalTextAlignment="Start" />
+                    <Frame CornerRadius="22" Padding="0">
+                        <Label
+                            Text="{Binding Email}"
+                            BackgroundColor="LightGray"
+                            FontSize="18"
+                            HeightRequest="50"
+                            VerticalTextAlignment="Center"                          
+                            HorizontalTextAlignment="Start"
+                            TextColor="{DynamicResource Black}" />
+                    </Frame>
+                </StackLayout>
+            </Grid>
+        </Grid>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,19 @@
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiKit.Views.DemoApp.MapUser"
+             xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
+             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasBackButton="False">
+    <Grid RowDefinitions="Auto, *">
+        <!-- Hàng đầu tiên dành cho SearchBar -->
+        <SearchBar Grid.Row="0"
+                   Placeholder="Nhập địa chỉ ID cần tìm kiếm"
+                   TextChanged="OnSearchTextChanged"
+                   SearchCommand="{Binding SearchCommand}"
+                   HorizontalOptions="Fill"
+                   Margin="10"/>
+        <!-- Hàng thứ hai dành cho Map -->
+        <maps:Map Grid.Row="1" x:Name="MyMapUser" MapType="Street" />
+    </Grid>
+</ContentPage>

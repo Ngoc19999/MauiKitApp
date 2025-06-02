@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Frame xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       x:Name="this"
+       BackgroundColor="{DynamicResource Primary}"
+       CornerRadius="10"
+       HasShadow="False"
+       HeightRequest="50"
+       Padding="{OnPlatform iOS= '5,0,5,0', Android='0,0,0,5'}"
+       Margin="0,10,0,0"
+       x:Class="MauiKit.Controls.ButtonLoading">
+    <HorizontalStackLayout HorizontalOptions="Center">
+        <ActivityIndicator Color="White"
+                           HeightRequest="25"
+                           WidthRequest="25"
+                           IsRunning="{Binding Source={x:Reference this}, Path=IsInProgress}"
+                           IsVisible="{Binding Source={x:Reference this}, Path=IsInProgress}" />
+        <Label TextColor="White"
+               x:Name="lblButtonText"
+               FontSize="18"
+               FontFamily="LeagueSpartanBold"
+               Text="{Binding Source={x:Reference this}, Path=Text}"
+               VerticalOptions="Center"
+               FontAttributes="Bold" />
+    </HorizontalStackLayout>
+    <Frame.Triggers>
+        <DataTrigger TargetType="Frame"
+                     Binding="{Binding Source={x:Reference this}, Path=IsInProgress}"
+                     Value="True">
+            <Setter Property="IsEnabled"
+                    Value="False" />
+        </DataTrigger>
+        <DataTrigger TargetType="Frame"
+                     Binding="{Binding Source={x:Reference this}, Path=IsInProgress}"
+                     Value="False">
+            <Setter Property="IsEnabled"
+                    Value="True" />
+        </DataTrigger>
+    </Frame.Triggers>
+    <Frame.GestureRecognizers>
+        <TapGestureRecognizer   Command="{Binding Source={x:Reference this}, Path=Command}"
+                                Tapped="TapGestureRecognizer_Tapped" />
+    </Frame.GestureRecognizers>
+</Frame>

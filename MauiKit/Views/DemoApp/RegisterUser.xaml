@@ -1,0 +1,195 @@
+    <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 x:Class="MauiKit.Views.DemoApp.RegisterUser"
+                 xmlns:controls="clr-namespace:MauiKit.Controls"
+                 xmlns:ffimageloading="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
+                 xmlns:localization="clr-namespace:MauiKit.Resources.Translations"
+                 xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+                 BackgroundColor="{DynamicResource BasePageColor}"
+                 NavigationPage.HasNavigationBar="False">
+
+        <ScrollView VerticalScrollBarVisibility="Never">
+            <Grid RowDefinitions="Auto, *, Auto">
+
+                <!--Background Image-->
+                <Image Grid.Row="1"
+                   Aspect="Fill"
+                   Opacity="0.5"
+                   Source="bg_purple.png" />
+
+                <!-- Gradient Mask -->
+                <Grid Grid.Row="1" InputTransparent="True">
+                    <Grid.Background>
+                        <LinearGradientBrush>
+                            <GradientStop Offset="0.1" Color="{DynamicResource LightGreen}" />
+                            <GradientStop Offset="1.0" Color="{DynamicResource LightGreen}" />
+                        </LinearGradientBrush>
+                    </Grid.Background>
+
+                    <!-- Logo và Label bên trong Gradient Mask -->
+                    <Grid
+            Padding="30"
+            HorizontalOptions="Center"
+            RowDefinitions="Auto, Auto, Auto, Auto, Auto"
+            RowSpacing="10"
+            VerticalOptions="Center"
+            Margin="0,-550,0,0">
+
+                        <Border
+            Padding="0"
+            Background="{DynamicResource PrimaryColor}"
+            HeightRequest="80"
+            HorizontalOptions="Center"
+            Shadow="{StaticResource CommonShadow}"
+            StrokeShape="{RoundRectangle CornerRadius=16}"
+            WidthRequest="80">
+
+                            <controls:RoundedCornerImage
+            Background="{DynamicResource White}"
+            HeightRequest="60"
+            HorizontalOptions="Center"
+            Source="logo.png"
+            Stroke="{DynamicResource PrimaryColor}"
+            StrokeShape="{RoundRectangle CornerRadius=30}"
+            StrokeThickness="1"
+            VerticalOptions="Center"
+            WidthRequest="60" />
+                        </Border>
+
+                        <Label
+            Grid.Row="1"
+            FontFamily="BoldFont"
+            FontSize="20"
+            HorizontalOptions="Center"
+            HorizontalTextAlignment="Center"
+            Style="{StaticResource Title1}"
+            Text="Đăng Ký Tài Khoản"
+            TextColor="{DynamicResource PrimaryColor}" />
+
+                    </Grid>
+                </Grid>
+                <!-- Form đăng ký -->
+            <Grid Grid.Row="1" Grid.ZIndex="2" ColumnDefinitions="{OnIdiom Desktop='1*, 8*, 1*', Phone='Auto, *, Auto', Tablet='1*, 8*, 1*', Default='Auto, *, Auto'}">
+                <StackLayout
+             Grid.Column="1"                        
+             Padding="30,0,30,20"
+             HorizontalOptions="Fill"
+             Spacing="15"                  
+             VerticalOptions="End" >
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="20" Margin="0,0,0,10">
+                       
+                        <Button
+                    x:Name="BtnParent" Text="Tài khoản bố mẹ"
+                    Clicked="OnSelectParentClicked"
+                    BackgroundColor="{DynamicResource PrimaryColor}"
+                    TextColor="White"
+                    CornerRadius="5" />
+                        <Button 
+                    x:Name="BtnChild" Text="Tài khoản con"
+                    Clicked="OnSelectChildClicked"
+                    BackgroundColor="Gray"
+                    TextColor="White"
+                    CornerRadius="5" />
+                    </StackLayout>
+                    <Frame CornerRadius="22" Padding="0">
+                           
+                        <Entry
+             x:Name="EntryFullName"
+             Placeholder="Họ và Tên"
+             BackgroundColor="LightGray"                                            
+             FontFamily="MediumFont"
+             FontSize="14"
+             HeightRequest="50"    
+             Text="{Binding FullName, Mode=TwoWay}"
+             TextColor="{DynamicResource White}" />
+                        </Frame>
+
+                        <Frame CornerRadius="22" Padding="0">
+                            <Entry
+             x:Name="EntryPhone"
+             Placeholder="Số điện thoại"
+             BackgroundColor="LightGray"                                            
+             FontFamily="MediumFont"
+             FontSize="14"
+             HeightRequest="50"    
+             Text="{Binding PhoneNumber, Mode=TwoWay}"        
+             TextColor="{DynamicResource White}" />
+                        </Frame>
+
+                        <Frame CornerRadius="22" Padding="0">
+                            <Entry
+             x:Name="EntryEmail"                   
+             Placeholder="Email"
+             BackgroundColor="LightGray"                                            
+             FontFamily="MediumFont"
+             FontSize="14"
+             HeightRequest="50"    
+             Text="{Binding Email, Mode=TwoWay}"
+             TextColor="{DynamicResource White}" />
+                        </Frame>
+
+                        <Frame CornerRadius="22" Padding="0">
+                            <Entry
+             x:Name="EntryPass"                    
+             Placeholder="Mật khẩu"
+             BackgroundColor="LightGray"                                            
+             FontFamily="MediumFont"
+             FontSize="14"
+             HeightRequest="50"    
+             Text="{Binding Password, Mode=TwoWay}"
+             IsPassword="True"
+             TextColor="{DynamicResource White}" />
+                        </Frame>
+
+                        <Frame CornerRadius="22" Padding="0">
+                            <Entry
+             x:Name="EntryCoffirmPass"
+             Placeholder="Nhập lại mật khẩu"
+             BackgroundColor="LightGray"                                            
+             FontFamily="MediumFont"
+             FontSize="14"
+             HeightRequest="50"    
+             Text="{Binding ConfirmPassword, Mode=TwoWay}"
+             IsPassword="True"
+             TextColor="{DynamicResource White}" />
+                        </Frame>
+
+                        <Frame CornerRadius="22" Padding="0">
+                            <Entry
+             x:Name="EntryReferralCode"
+             Placeholder="Mã giới thiệu ( nếu có )"
+             BackgroundColor="LightGray"                                            
+             FontFamily="MediumFont"
+             FontSize="14"
+             HeightRequest="50"    
+             Text="{Binding ReferralCode, Mode=TwoWay}"
+             TextColor="{DynamicResource White}" />
+                        </Frame>
+
+                        <Button
+              BackgroundColor="{DynamicResource Primary35Color}"
+              BorderColor="{DynamicResource Primary50Color}"
+              BorderWidth="1.2"                     
+              CornerRadius="10"
+              FontFamily="MediumFont"
+              FontSize="14"
+              HeightRequest="40"
+              WidthRequest="150"
+              Text="{localization:Translate StringRegisterNow}"
+              TextColor="{DynamicResource BaseTextColor}"
+              Clicked ="OnRegisterClicked" />
+                        <Label 
+                Text="Đã có tài khoản? Đăng nhập ngay"
+                FontFamily="MediumFont"
+                FontSize="14"
+                HorizontalOptions="Center"
+                TextColor="{DynamicResource PrimaryColor}">
+                            <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnLoginTapped"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+                </Grid>
+            </Grid>
+        </ScrollView>
+    </ContentPage>

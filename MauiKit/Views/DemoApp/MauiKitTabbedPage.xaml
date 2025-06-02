@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage  xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:MauiKit.Views.DemoApp"
+             x:Class="MauiKit.Views.DemoApp.MauiKitTabbedPage"
+             xmlns:android="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;assembly=Microsoft.Maui.Controls"
+             Title="MauiKitTabbedPage" 
+             android:TabbedPage.ToolbarPlacement="Bottom">
+    <views:MapTest Title="Bản Đồ" />
+    <views:ProfileUser Title="Thông Tin Người Dùng" /> 
+</TabbedPage>
