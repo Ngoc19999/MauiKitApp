@@ -146,21 +146,32 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.50" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.3" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.50" />
-		<PackageReference Include="Microsoft.Maui.Controls.Maps" Version="9.0.70" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="PropertyChanged.Fody" Version="4.1.0" />
 		<PackageReference Include="RGPopup.Maui" Version="1.1.2" />
 		<PackageReference Include="SkiaSharp.Extended.UI.Maui" Version="2.0.0" />
 		<PackageReference Include="CommunityToolkit.Maui" Version="11.1.0" />
 		<PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="6.0.1" />
+
+		<PackageReference Include="Plugin.Firebase.Analytics" Version="3.0.0" />
+		<PackageReference Include="Plugin.Firebase.CloudMessaging" Version="3.0.0" />
+		<PackageReference Include="Plugin.Firebase.Firestore" Version="3.0.0" />
+		<PackageReference Include="Plugin.Firebase.Auth.Google" Version="2.0.0" />
+		<PackageReference Include="Plugin.Firebase.Auth" Version="3.0.0" />
+		<PackageReference Include="Xamarin.Build.Download" Version="0.11.4" />
 		
 	</ItemGroup>
 
 	<ItemGroup Condition="$(TargetFramework.Contains('-android'))">
 		<AndroidResource Include="Platforms\Android\Resources\**" TargetPath="%(RecursiveDir)%(Filename)%(Extension)" />
+		
+		<GoogleServicesJson Include="google-services.json"></GoogleServicesJson>
 	</ItemGroup>
 
 	<ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
+		<PackageReference Include="AdamE.Firebase.iOS.Core" Version="10.24.0.2" />
+		<PackageReference Include="Xamarin.Firebase.iOS.Core" Version="8.10.0.3" />
+		<BundleResource Include="GoogleService-Info.plist"></BundleResource>
 		<BundleResource Include="Platforms\iOS\Resources\**" TargetPath="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
 
@@ -189,9 +200,6 @@
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\Base\BasePage.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Views\Dashboards\DefaultTabbedPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\DemoApp\AboutPage.xaml">
@@ -272,6 +280,10 @@
 	  <None Update="Views\DemoApp\SignupPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Views\Dashboards\" />
 	</ItemGroup>
 
 </Project>

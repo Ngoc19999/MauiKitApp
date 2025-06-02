@@ -3,6 +3,9 @@ using SkiaSharp.Views.Maui.Controls.Hosting;
 using Microsoft.Maui.LifecycleEvents;
 using MauiKit.Handlers;
 using CommunityToolkit.Maui.Core;
+using Plugin.Firebase.Analytics;
+using Plugin.Firebase.CloudMessaging;
+using Plugin.Firebase.Auth.Google;
 using Microsoft.Extensions.Logging;
 using PanCardView;
 using FFImageLoading.Maui;
@@ -12,6 +15,12 @@ using MauiKit.Views.Onboardings;
 using Microsoft.Maui.Controls.Hosting;
 using MyMauiApp.CustomHandlers;
 
+#if IOS
+using Plugin.Firebase.Core.Platforms.iOS;
+using UIKit;
+#elif ANDROID
+using Plugin.Firebase.Core.Platforms.Android;
+#endif
 
 
 
@@ -21,6 +30,7 @@ using Microsoft.UI.Windowing;
 using Windows.Graphics;
 using WinRT.Interop;
 using Windows.UI.Core;
+using Plugin.Firebase.CloudMessaging;
 
 #endif
 
@@ -144,11 +154,44 @@ namespace MauiKit
             return app;
         }
 
+        private static MauiAppBuilder RegisterFirebaseServices(this MauiAppBuilder builder)
+        {
+            builder.ConfigureLifecycleEvents(events =>
+            {
+#if IOS
+                events.AddiOS(iOS => iOS.WillFinishLaunching((app, launchOptions) =>
+                {
+                    CrossFirebase.Initialize();
+                    FirebaseAuthGoogleImplementation.Initialize();
+                    FirebaseCloudMessagingImplementation.Initialize();
+                    return true;
+                }));
+#elif ANDROID
+                events.AddAndroid(android => android.OnCreate((activity, _) =>
+                {
+                    CrossFirebase.Initialize(activity);
+                    FirebaseAnalyticsImplementation.Initialize(activity);
+                    FirebaseAuthGoogleImplementation.Initialize("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"); /*webclient thuelai project*/
+                }));
+#endif
+            });
+
+            CrossFirebaseCloudMessaging.Current.NotificationTapped += Current_NotificationTapped;
+            return builder;
+        }
+
         public static MauiAppBuilder RegisterDemoAppServices(this MauiAppBuilder mauiAppBuilder)
         {
             return mauiAppBuilder;
         }
-
+        private static void Current_NotificationTapped(object? sender, Plugin.Firebase.CloudMessaging.EventArgs.FCMNotificationTappedEventArgs e)
+        {
+            var notificationData = e.Notification.Data;
+            if (notificationData.ContainsKey("link"))
+            {
+                //Do something with the link
+            }
+        }
         public static MauiAppBuilder RegisterViewModels(this MauiAppBuilder mauiAppBuilder)
         {
             mauiAppBuilder.Services.AddTransient<MainPage>();
