@@ -69,7 +69,7 @@
                         HorizontalTextAlignment="Center"
                         Style="{StaticResource CustomTitle}"
                         Text="{localization:Translate StringAppWelcomeTitle}"
-                        TextColor="{DynamicResource White}"
+                        TextColor="{DynamicResource BaseTextColor}"
                         VerticalOptions="Center" />
 
                 </Grid>
@@ -118,7 +118,7 @@
                         FontSize="14"
                         HeightRequest="50"    
                         Text="{Binding FullName, Mode=TwoWay}"
-                        TextColor="{DynamicResource White}" />
+                        TextColor="{DynamicResource BaseTextColor}" />
                     </Frame>
 
                     <Frame CornerRadius="22" Padding="0">   
@@ -130,7 +130,7 @@
                         HeightRequest="50"    
                         Text="{Binding Password, Mode=TwoWay}"
                         IsPassword="True"
-                        TextColor="{DynamicResource White}" />
+                        TextColor="{DynamicResource BaseTextColor}" />
                     </Frame>
                     <controls:ButtonLoading 
                          BackgroundColor="{DynamicResource Primary35Color}"
@@ -146,7 +146,7 @@
                         FontFamily="MediumFont"
                         FontSize="14"
                         HorizontalOptions="Center"
-                        TextColor="{DynamicResource PrimaryColor}">
+                        TextColor="{DynamicResource BaseTextColor}">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding NavigateToLoginCommand}" />
                         </Label.GestureRecognizers>
@@ -156,7 +156,7 @@
                         FontFamily="MediumFont"
                         FontSize="14"
                         HorizontalOptions="Center"
-                        TextColor="{DynamicResource PrimaryColor}">
+                        TextColor="{DynamicResource BaseTextColor}">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer
                             Command="{Binding NavigateToForgotPasswordCommand}" />

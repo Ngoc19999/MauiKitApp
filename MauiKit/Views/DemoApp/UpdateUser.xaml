@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiKit.Views.DemoApp.UpdateUser"
+             xmlns:controls="clr-namespace:MauiKit.Controls"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
+             xmlns:localization="clr-namespace:MauiKit.Resources.Translations"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             BackgroundColor="{DynamicResource BasePageColor}"    
+             NavigationPage.HasBackButton="False"
+             NavigationPage.HasNavigationBar="False">
+    <ScrollView VerticalScrollBarVisibility="Never">
+        <Grid RowDefinitions="*, Auto">
+            <Grid
+        Padding="30"
+        HorizontalOptions="Center"
+        RowDefinitions="Auto, Auto, Auto, Auto, Auto"
+        RowSpacing="10"
+        VerticalOptions="Center"
+        Margin="0,-10,0,0">
+                <Border
+            Padding="0"
+            Background="{DynamicResource PrimaryColor}"
+            HeightRequest="80"
+            HorizontalOptions="Center"
+            Shadow="{StaticResource CommonShadow}"
+            StrokeShape="{RoundRectangle CornerRadius=16}"
+            WidthRequest="80">
+
+                    <controls:RoundedCornerImage
+                Background="{DynamicResource White}"
+                HeightRequest="60"
+                HorizontalOptions="Center"
+                Source="logo.png"
+                Stroke="{DynamicResource PrimaryColor}"
+                StrokeShape="{RoundRectangle CornerRadius=30}"
+                StrokeThickness="1"
+                VerticalOptions="Center"
+                WidthRequest="60" />
+                </Border>
+
+                <Label
+            Grid.Row="1"
+            FontFamily="BoldFont"
+            FontSize="20"
+            HorizontalOptions="Center"
+            HorizontalTextAlignment="Center"
+            Style="{StaticResource Title1}"
+            Text="Welcome to"
+            TextColor="{DynamicResource PrimaryColor}" />
+
+                <Grid Grid.Row="2">
+                    <ffimageloading:CachedImage
+                Aspect="AspectFit"
+                DownsampleToViewSize="True"
+                HeightRequest="{OnIdiom Phone='170',
+                                        Desktop='350',
+                                        Tablet='230'}"
+                Source="bg_paint.png"
+                VerticalOptions="Center" />
+
+                    <Label
+                Margin="0,-5,0,0"
+                FontAttributes="Bold"
+                FontSize="30"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                Style="{StaticResource CustomTitle}"
+                Text="Find My Children "
+                TextColor="{DynamicResource BaseTextColor}"
+                VerticalOptions="Center" />
+                </Grid>
+
+
+            </Grid>
+            <Grid Grid.Row="1" Grid.ZIndex="2" ColumnDefinitions="{OnIdiom Desktop='1*, 8*, 1*', Phone='Auto, *, Auto', Tablet='1*, 8*, 1*', Default='Auto, *, Auto'}">
+                <StackLayout
+                          Grid.Column="1"                        
+                          Padding="30,0,30,20"
+                          HorizontalOptions="Fill"
+                          Spacing="15"                  
+                          VerticalOptions="End" >
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="20" Margin="0,0,0,10">
+
+                    </StackLayout>
+                    <Frame CornerRadius="22" Padding="0">
+
+                        <Entry
+                              x:Name="EntryFullName"
+                              Placeholder="{Binding HoTen, TargetNullValue='Họ và Tên'}"
+                              BackgroundColor="LightGray"                                            
+                              FontFamily="MediumFont"
+                              FontSize="14"
+                              HeightRequest="50"    
+                              Text="{Binding FullName, Mode=TwoWay}"
+                              TextColor="{DynamicResource BaseTextColor}" />
+                    </Frame>
+
+                    <Frame CornerRadius="22" Padding="0">
+                        <Entry
+                              x:Name="EntryPhone"
+                              Placeholder="{Binding Phone, TargetNullValue='Số điện thoại'}"
+                              BackgroundColor="LightGray"                                            
+                              FontFamily="MediumFont"
+                              FontSize="14"
+                              HeightRequest="50"    
+                              Text="{Binding Phone, Mode=TwoWay}"
+                              TextColor="{DynamicResource BaseTextColor}" />
+                    </Frame>
+
+                    <Frame CornerRadius="22" Padding="0">
+                        <Entry
+                              x:Name="EntryEmail"                   
+                               Placeholder="{Binding Email, TargetNullValue='Họ và Tên'}"
+                               BackgroundColor="LightGray"                                            
+                               FontFamily="MediumFont"
+                               FontSize="14"
+                               HeightRequest="50"    
+                               Text="{Binding Email, Mode=TwoWay}"
+                               TextColor="{DynamicResource BaseTextColor}" />
+                    </Frame>
+
+                    <Frame CornerRadius="22" Padding="0">
+                        <Entry
+                              x:Name="EntryPass"                    
+                              Placeholder="{Binding Pass, TargetNullValue='Họ và Tên'}"
+                              BackgroundColor="LightGray"                                            
+                              FontFamily="MediumFont"
+                              FontSize="14"
+                              HeightRequest="50"    
+                              Text="{Binding Pass, Mode=TwoWay}"
+                              TextColor="{DynamicResource BaseTextColor}" />
+                    </Frame>
+
+                    <Button
+                               BackgroundColor="{DynamicResource Primary35Color}"
+                               BorderColor="{DynamicResource Primary50Color}"
+                               BorderWidth="1.2"                     
+                               CornerRadius="10"
+                               FontFamily="MediumFont"
+                               FontSize="14"
+                               HeightRequest="40"
+                               WidthRequest="150"
+                               Text="Lưu thông tin"
+                               TextColor="{DynamicResource BaseTextColor}" />
+                </StackLayout>
+            </Grid>
+        </Grid>
+    </ScrollView>
+</ContentPage>
