@@ -1,104 +1,104 @@
-﻿#if ANDROID
-using Android.Content;
+﻿namespace MauiMaps;
+
+using System.Linq;
 using Android.Gms.Maps;
 using Android.Gms.Maps.Model;
 using Android.Graphics;
+using Android.Graphics.Drawables;
+using Microsoft.Maui.Maps;
 using Microsoft.Maui.Maps.Handlers;
+using Microsoft.Maui.Platform;
 
-
-namespace MauiKit.Platforms.Android
+public class CustomMapHandler : MapHandler
 {
-    // Custom handler kế thừa MapHandler, sử dụng IPropertyMapper mới để cập nhật CustomPins.
-    public class CustomMapHandler : MapHandler
-    {
-        // Tạo một Property Mapper mở rộng (thừa kế từ mapper mặc định của MapHandler) 
-        // để quan sát sự thay đổi của CustomPins.
-        public static IPropertyMapper<CustomMap, CustomMapHandler> CustomMapper = new PropertyMapper<CustomMap, CustomMapHandler>(MapHandler.Mapper)
-        {
-            [nameof(CustomMap.CustomPins)] = MapCustomPins,
-        };
+	public static readonly IPropertyMapper<IMap, IMapHandler> CustomMapper =
+		new PropertyMapper<IMap, IMapHandler>(Mapper)
+		{
+			[nameof(IMap.Pins)] = MapPins
+		};
 
-        public CustomMapHandler() : base(CustomMapper)
-        {
-        }
+	public CustomMapHandler() : base(CustomMapper, CommandMapper)
+	{
+	}
 
-        // Override phương thức tạo native view: Lấy instance của Android.Gms.Maps.MapView.
-        protected override global::Android.Gms.Maps.MapView CreatePlatformView()
-        {
-            var mapView = base.CreatePlatformView();
-            // Sử dụng GetMapAsync để đảm bảo rằng GoogleMap đã được tạo xong rồi gọi callback.
-            mapView.GetMapAsync(new MapReadyCallback(googleMap =>
-            {
-                UpdatePins(googleMap);
-            }));
-            return mapView;
-        }
+	public CustomMapHandler(IPropertyMapper? mapper = null, CommandMapper? commandMapper = null) : base(
+		mapper ?? CustomMapper, commandMapper ?? CommandMapper)
+	{
+	}
 
-        // Phương thức ánh xạ property CustomPins từ CustomMap sang handler.
-        public static void MapCustomPins(CustomMapHandler handler, CustomMap map)
-        {
-            if (handler.PlatformView == null || map.CustomPins == null)
-                return;
+	public List<(IMapPin pin, Marker marker)> Markers { get; } = new();
 
-            // Khi có sự thay đổi trong CustomPins, cập nhật lại các marker trên bản đồ.
-            handler.PlatformView.GetMapAsync(new MapReadyCallback(googleMap =>
-            {
-                handler.UpdatePins(googleMap);
-            }));
-        }
+	protected override void ConnectHandler(MapView platformView)
+	{
+		base.ConnectHandler(platformView);
+		var mapReady = new MapCallbackHandler(this);
+		PlatformView.GetMapAsync(mapReady);
+	}
 
-        // Phương thức cập nhật: Duyệt qua danh sách custom pins và thêm marker vào GoogleMap.
-        void UpdatePins(GoogleMap googleMap)
-        {
-            // Xóa hết các marker cũ nếu có.
-            googleMap.Clear();
+	private static new void MapPins(IMapHandler handler, IMap map)
+	{
+		if (handler is CustomMapHandler mapHandler)
+		{
+			var pinsToAdd = map.Pins.Where(x => x.MarkerId == null).ToList();
+			var pinsToRemove = mapHandler.Markers.Where(x => !map.Pins.Contains(x.pin)).ToList();
+			foreach (var marker in pinsToRemove)
+			{
+				marker.marker.Remove();
+				mapHandler.Markers.Remove(marker);
+			}
 
-            // Ép kiểu VirtualView sang CustomMap để chúng ta có thể truy cập CustomPins.
-            if (!(VirtualView is CustomMap customMap) || customMap.CustomPins == null)
-                return;
+			mapHandler.AddPins(pinsToAdd);
+		}
+	}
 
-            // Duyệt qua tất cả custom pin được bind từ shared code.
-            foreach (var pin in customMap.CustomPins)
-            {
-                var markerOptions = new MarkerOptions();
-                // Đặt vị trí cho marker, chuyển đổi Location trong CustomMapPin thành LatLng.
-                markerOptions.SetPosition(new LatLng(pin.Position.Latitude, pin.Position.Longitude));
+	private void AddPins(IEnumerable<IMapPin> mapPins)
+	{
+		if (Map is null || MauiContext is null)
+		{
+			return;
+		}
 
-                // Nếu có icon (chẳng hạn ghi là "darkmode") thì thực hiện tìm resource theo tên:
-                if (!string.IsNullOrEmpty(pin.Icon))
-                {
-                    Context context = global::Android.App.Application.Context; 
-                    // Tìm resource theo tên (không cần đuôi .png) trong thư mục drawable.
-                    int resourceId = context.Resources.GetIdentifier(pin.Icon, "drawable", context.PackageName);
-                    if (resourceId != 0)
-                    {
-                        // Decode resource thành Bitmap.
-                        Bitmap iconBitmap = BitmapFactory.DecodeResource(context.Resources, resourceId);
-                        // Gán Bitmap làm icon cho marker.
-                        markerOptions.SetIcon(BitmapDescriptorFactory.FromBitmap(iconBitmap));
-                    }
-                }
+		foreach (var pin in mapPins)
+		{
+			var pinHandler = pin.ToHandler(MauiContext);
+			if (pinHandler is IMapPinHandler mapPinHandler)
+			{
+				var markerOption = mapPinHandler.PlatformView;
+				if (pin is CustomPin cp)
+				{
+					cp.ImageSource.LoadImage(MauiContext, result =>
+					{
+						if (result?.Value is BitmapDrawable { Bitmap: not null } bitmapDrawable)
+						{
+							markerOption.SetIcon(BitmapDescriptorFactory.FromBitmap(GetMaximumBitmap(bitmapDrawable.Bitmap, 100, 100)));
+						}
 
-                // Thêm marker vào GoogleMap.
-                googleMap.AddMarker(markerOptions);
-            }
-        }
-    }
+						AddMarker(Map, pin, markerOption);
+					});
+				}
+				else
+				{
+					AddMarker(Map, pin, markerOption);
+				}
+			}
+		}
+	}
 
-    // Callback để nhận GoogleMap qua GetMapAsync.
-    public class MapReadyCallback : Java.Lang.Object, IOnMapReadyCallback
-    {
-        private readonly Action<GoogleMap> _callback;
+	private void AddMarker(GoogleMap map, IMapPin pin, MarkerOptions markerOption)
+	{
+		var marker = map.AddMarker(markerOption);
+		pin.MarkerId = marker.Id;
+		Markers.Add((pin, marker));
+	}
 
-        public MapReadyCallback(Action<GoogleMap> callback)
-        {
-            _callback = callback;
-        }
+	private static Bitmap GetMaximumBitmap(in Bitmap sourceImage, in float maxWidth, in float maxHeight)
+	{
+		var sourceSize = new Size(sourceImage.Width, sourceImage.Height);
+		var maxResizeFactor = Math.Min(maxWidth / sourceSize.Width, maxHeight / sourceSize.Height);
 
-        public void OnMapReady(GoogleMap googleMap)
-        {
-            _callback?.Invoke(googleMap);
-        }
-    }
+		var width = Math.Max(maxResizeFactor * sourceSize.Width, 1);
+		var height = Math.Max(maxResizeFactor * sourceSize.Height, 1);
+		return Bitmap.CreateScaledBitmap(sourceImage, (int)width, (int)height, false)
+				?? throw new InvalidOperationException("Failed to create Bitmap");
+	}
 }
-#endif

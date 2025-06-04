@@ -11,12 +11,15 @@ using PanCardView;
 using FFImageLoading.Maui;
 using RGPopup.Maui.Extensions;
 using MauiKit.Views;
+using MauiMaps;
 //using MauiKit.Views.Onboardings;
 using Microsoft.Maui.Controls.Hosting;
 using MyMauiApp.CustomHandlers;
 using MauiKit.Views.DemoApp;
 #if ANDROID
-using MauiKit.Platforms.Android;
+
+
+
 #endif
 
 
@@ -62,6 +65,12 @@ namespace MauiKit
                 .UseSkiaSharp()
                 .UseCardsView()
                 .UseFFImageLoading()
+                .ConfigureMauiHandlers(handlers =>
+                {
+#if IOS || ANDROID
+                    handlers.AddHandler<Microsoft.Maui.Controls.Maps.Map, CustomMapHandler>();
+#endif
+                })
                 .UseMauiRGPopup(config =>
                 {
                     config.BackPressHandler = null;
