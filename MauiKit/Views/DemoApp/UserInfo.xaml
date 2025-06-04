@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiKit.Views.DemoApp.UserInfo"
+                      xmlns:controls="clr-namespace:MauiKit.Controls"
+         xmlns:ffimageloading="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
+         xmlns:localization="clr-namespace:MauiKit.Resources.Translations"
+         xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+         BackgroundColor="{DynamicResource BasePageColor}"    
+         NavigationPage.HasBackButton="False"
+         NavigationPage.HasNavigationBar="False">
+    <ScrollView VerticalScrollBarVisibility="Never">
+        <Grid RowDefinitions="*, Auto">
+
+            <Grid
+    Padding="30"
+    HorizontalOptions="Center"
+    RowDefinitions="Auto, Auto, Auto, Auto, Auto"
+    RowSpacing="10"
+    VerticalOptions="Center"
+    Margin="0,-110,0,0">
+
+                <Border
+        Padding="0"
+        Background="{DynamicResource PrimaryColor}"
+        HeightRequest="80"
+        HorizontalOptions="Center"
+        Shadow="{StaticResource CommonShadow}"
+        StrokeShape="{RoundRectangle CornerRadius=16}"
+        WidthRequest="80">
+
+                    <controls:RoundedCornerImage
+            Background="{DynamicResource White}"
+            HeightRequest="60"
+            HorizontalOptions="Center"
+            Source="logo.png"
+            Stroke="{DynamicResource PrimaryColor}"
+            StrokeShape="{RoundRectangle CornerRadius=30}"
+            StrokeThickness="1"
+            VerticalOptions="Center"
+            WidthRequest="60" />
+                </Border>
+
+                <Label
+        Grid.Row="1"
+        FontFamily="BoldFont"
+        FontSize="20"
+        HorizontalOptions="Center"
+        HorizontalTextAlignment="Center"
+        Style="{StaticResource Title1}"
+        Text="Welcome to"
+        TextColor="{DynamicResource PrimaryColor}" />
+
+                <Grid Grid.Row="2">
+                    <ffimageloading:CachedImage
+            Aspect="AspectFit"
+            DownsampleToViewSize="True"
+            HeightRequest="{OnIdiom Phone='170',
+                                    Desktop='350',
+                                    Tablet='230'}"
+            Source="bg_paint.png"
+            VerticalOptions="Center" />
+
+                    <Label
+            Margin="0,-5,0,0"
+            FontAttributes="Bold"
+            FontSize="30"
+            HorizontalOptions="Center"
+            HorizontalTextAlignment="Center"
+            Style="{StaticResource CustomTitle}"
+            Text="Find My Children "
+            TextColor="{DynamicResource BaseTextColor}"
+            VerticalOptions="Center" />
+
+                </Grid>
+            </Grid>
+        </Grid>
+    </ScrollView>
+</ContentPage>

@@ -2,10 +2,26 @@
 <TabbedPage  xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:views="clr-namespace:MauiKit.Views.DemoApp"
+             xmlns:local="clr-namespace:MauiKit.Views"
              x:Class="MauiKit.Views.DemoApp.MauiKitTabbedPage"
              xmlns:android="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;assembly=Microsoft.Maui.Controls"
              Title="MauiKitTabbedPage" 
-             android:TabbedPage.ToolbarPlacement="Bottom">
-    <views:MapTest Title="Bản Đồ" />
-    <views:ProfileUser Title="Thông Tin Người Dùng" /> 
+             android:TabbedPage.ToolbarPlacement="Bottom"
+             NavigationPage.HasNavigationBar="False">
+    <TabbedPage.Resources>
+        <!-- Tạo nguồn ảnh dựa trên font icon từ class MauiKitIcon -->
+        <FontImageSource x:Key="MapIcon"  
+                      Glyph="{x:Static local:MauiKitIcons.Map}"
+                      FontFamily="MauiKitIcons"
+                      Size="24"
+                      Color="Black" />
+
+        <FontImageSource x:Key="ProfileIcon"  
+                      Glyph="{x:Static local:MauiKitIcons.FaceProfile}"
+                      FontFamily="MauiKitIcons"
+                      Size="24"
+                      Color="Black" />
+    </TabbedPage.Resources>
+    <views:MapTest Title="Map" IconImageSource="{StaticResource MapIcon}" />
+    <views:ProfileUser Title="Thông Tin Người Dùng" IconImageSource="{StaticResource ProfileIcon}" />
 </TabbedPage>

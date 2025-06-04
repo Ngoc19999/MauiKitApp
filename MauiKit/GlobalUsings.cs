@@ -30,4 +30,4 @@ global using MauiKit.ViewModels.Base;
 global using MauiKit.ViewModels.FontIcons;
 
 
-global using MauiKit.ViewModels.Onboardings;
+//global using MauiKit.ViewModels.Onboardings;

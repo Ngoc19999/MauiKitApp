@@ -16,8 +16,9 @@ using LiveChartsCore;
 using LiveChartsCore.SkiaSharpView;
 using SkiaSharp;
 using MauiKit.Handlers;
-using MauiKit.Views.Onboardings;
+//using MauiKit.Views.Onboardings;
 using MauiKit.Views.DemoApp;
+
 
 
 namespace MauiKit
@@ -99,31 +100,31 @@ namespace MauiKit
                 AppSettings.IsFirstLaunching = true; //Set to 'false' in production
                 MainPage = new NavigationPage(new LoginPage());
             }
-            else
-            {
-                MainPage = GetMainPage();   
-            }
+        //    else
+        //    {
+        //        MainPage = GetMainPage();   
+        //    }
         }
 
-        public static Page GetMainPage()
-        {
-            return new AppFlyout();
-        }
+        //public static Page GetMainPage()
+        //{
+        //    return new AppFlyout();
+        //}
 
-        public void ChangeFlyoutDirection()
-        {
-            var flyoutPage = (AppFlyout)MainPage;
-            if (AppSettings.IsRTLLanguage)
-            {
-                flyoutPage.Flyout.FlowDirection = FlowDirection.RightToLeft;
-                flyoutPage.FlowDirection = FlowDirection.RightToLeft;
-            }
-            else
-            {
-                flyoutPage.Flyout.FlowDirection = FlowDirection.LeftToRight;
-                flyoutPage.FlowDirection = FlowDirection.LeftToRight;
-            }
-        }
+        //public void ChangeFlyoutDirection()
+        //{
+        //    var flyoutPage = (AppFlyout)MainPage;
+        //    if (AppSettings.IsRTLLanguage)
+        //    {
+        //        flyoutPage.Flyout.FlowDirection = FlowDirection.RightToLeft;
+        //        flyoutPage.FlowDirection = FlowDirection.RightToLeft;
+        //    }
+        //    else
+        //    {
+        //        flyoutPage.Flyout.FlowDirection = FlowDirection.LeftToRight;
+        //        flyoutPage.FlowDirection = FlowDirection.LeftToRight;
+        //    }
+        //}
 
         protected override void OnStart()
         {

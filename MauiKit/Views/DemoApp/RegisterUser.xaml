@@ -64,7 +64,7 @@
             HorizontalTextAlignment="Center"
             Style="{StaticResource Title1}"
             Text="Đăng Ký Tài Khoản"
-            TextColor="{DynamicResource PrimaryColor}" />
+            TextColor="{DynamicResource BaseTextColor}" />
 
                     </Grid>
                 </Grid>
@@ -82,14 +82,14 @@
                     x:Name="BtnParent" Text="Tài khoản bố mẹ"
                     Clicked="OnSelectParentClicked"
                     BackgroundColor="{DynamicResource PrimaryColor}"
-                    TextColor="White"
-                    CornerRadius="5" />
+                    TextColor="{DynamicResource BaseTextColor}"
+                    CornerRadius="11" />
                         <Button 
                     x:Name="BtnChild" Text="Tài khoản con"
                     Clicked="OnSelectChildClicked"
-                    BackgroundColor="Gray"
-                    TextColor="White"
-                    CornerRadius="5" />
+                    BackgroundColor="{DynamicResource PrimaryColor}"
+                    TextColor="{DynamicResource BaseTextColor}"
+                    CornerRadius="11" />
                     </StackLayout>
                     <Frame CornerRadius="22" Padding="0">
                            
@@ -101,7 +101,7 @@
              FontSize="14"
              HeightRequest="50"    
              Text="{Binding FullName, Mode=TwoWay}"
-             TextColor="{DynamicResource White}" />
+             TextColor="{DynamicResource BaseTextColor}" />
                         </Frame>
 
                         <Frame CornerRadius="22" Padding="0">
@@ -113,7 +113,7 @@
              FontSize="14"
              HeightRequest="50"    
              Text="{Binding PhoneNumber, Mode=TwoWay}"        
-             TextColor="{DynamicResource White}" />
+             TextColor="{DynamicResource BaseTextColor}" />
                         </Frame>
 
                         <Frame CornerRadius="22" Padding="0">
@@ -125,7 +125,7 @@
              FontSize="14"
              HeightRequest="50"    
              Text="{Binding Email, Mode=TwoWay}"
-             TextColor="{DynamicResource White}" />
+             TextColor="{DynamicResource BaseTextColor}" />
                         </Frame>
 
                         <Frame CornerRadius="22" Padding="0">
@@ -138,7 +138,7 @@
              HeightRequest="50"    
              Text="{Binding Password, Mode=TwoWay}"
              IsPassword="True"
-             TextColor="{DynamicResource White}" />
+             TextColor="{DynamicResource BaseTextColor}" />
                         </Frame>
 
                         <Frame CornerRadius="22" Padding="0">
@@ -151,7 +151,7 @@
              HeightRequest="50"    
              Text="{Binding ConfirmPassword, Mode=TwoWay}"
              IsPassword="True"
-             TextColor="{DynamicResource White}" />
+             TextColor="{DynamicResource BaseTextColor}" />
                         </Frame>
 
                         <Frame CornerRadius="22" Padding="0">
@@ -163,7 +163,7 @@
              FontSize="14"
              HeightRequest="50"    
              Text="{Binding ReferralCode, Mode=TwoWay}"
-             TextColor="{DynamicResource White}" />
+             TextColor="{DynamicResource BaseTextColor}" />
                         </Frame>
 
                         <Button
@@ -175,7 +175,7 @@
               FontSize="14"
               HeightRequest="40"
               WidthRequest="150"
-              Text="{localization:Translate StringRegisterNow}"
+              Text="Đăng ký"
               TextColor="{DynamicResource BaseTextColor}"
               Clicked ="OnRegisterClicked" />
                         <Label 
@@ -183,11 +183,13 @@
                 FontFamily="MediumFont"
                 FontSize="14"
                 HorizontalOptions="Center"
-                TextColor="{DynamicResource PrimaryColor}">
+                TextColor="{DynamicResource BaseTextColor}">
                             <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnLoginTapped"/>
                             </Label.GestureRecognizers>
+                      
                         </Label>
+                    
                     </StackLayout>
                 </Grid>
             </Grid>

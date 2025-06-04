@@ -7,118 +7,156 @@
              xmlns:localization="clr-namespace:MauiKit.Resources.Translations"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              BackgroundColor="{DynamicResource BasePageColor}"    
-             NavigationPage.HasBackButton="False" 
+             NavigationPage.HasBackButton="False"
+             NavigationPage.HasNavigationBar="False"
              Title="ProfileUser">
-    <Grid RowDefinitions="Auto, *, Auto">
+    <ScrollView VerticalScrollBarVisibility="Never">
+        <Grid RowDefinitions="*, Auto">
 
-        <!--Background Image-->
-        <Image Grid.Row="1"
-           Aspect="Fill"
-           Opacity="0.5"
-           Source="bg_purple.png" />
+            <Grid
+            Padding="30"
+            HorizontalOptions="Center"
+            RowDefinitions="Auto, Auto, Auto, Auto, Auto"
+            RowSpacing="10"
+            VerticalOptions="Center"
+            Margin="0,-110,0,0">
 
-        <!-- Gradient Mask -->
-        <Grid Grid.Row="1">
-            <Grid.Background>
-                <LinearGradientBrush>
-                    <GradientStop Offset="0.1" Color="{DynamicResource LightGreen}" />
-                    <GradientStop Offset="1.0" Color="{DynamicResource LightGreen}" />
-                </LinearGradientBrush>
-            </Grid.Background>
-
-            <!-- Logo và Label bên trong Gradient Mask -->
-            <Grid VerticalOptions="Center" HorizontalOptions="Center">
                 <Border
-                Margin="0,-600,0,0"
                 Padding="0"
                 Background="{DynamicResource PrimaryColor}"
                 HeightRequest="80"
-                WidthRequest="80"
+                HorizontalOptions="Center"
                 Shadow="{StaticResource CommonShadow}"
-                StrokeShape="{RoundRectangle CornerRadius=16}">
+                StrokeShape="{RoundRectangle CornerRadius=16}"
+                WidthRequest="80">
 
                     <controls:RoundedCornerImage
                     Background="{DynamicResource White}"
                     HeightRequest="60"
-                    WidthRequest="60"
+                    HorizontalOptions="Center"
                     Source="logo.png"
                     Stroke="{DynamicResource PrimaryColor}"
                     StrokeShape="{RoundRectangle CornerRadius=30}"
                     StrokeThickness="1"
-                    VerticalOptions="Center" />
+                    VerticalOptions="Center"
+                    WidthRequest="60" />
                 </Border>
 
-                <Label                   
+                <Label
+                Grid.Row="1"
                 FontFamily="BoldFont"
-                FontSize="25"
+                FontSize="20"
                 HorizontalOptions="Center"
                 HorizontalTextAlignment="Center"
                 Style="{StaticResource Title1}"
-                Text="Thông Tin Người Dùng"
-                TextColor="{DynamicResource PrimaryColor}"
-                Margin="0,-230,0,0" />
+                Text="Welcome to"
+                TextColor="{DynamicResource PrimaryColor}" />
+
+                <Grid Grid.Row="2">
+                    <ffimageloading:CachedImage
+                    Aspect="AspectFit"
+                    DownsampleToViewSize="True"
+                    HeightRequest="{OnIdiom Phone='170',
+                                            Desktop='350',
+                                            Tablet='230'}"
+                    Source="bg_paint.png"
+                    VerticalOptions="Center" />
+
+                    <Label
+                    Margin="0,-5,0,0"
+                    FontAttributes="Bold"
+                    FontSize="30"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Style="{StaticResource CustomTitle}"
+                    Text="Find My Children "
+                    TextColor="{DynamicResource BaseTextColor}"
+                    VerticalOptions="Center" />
+
+                </Grid>
+
             </Grid>
             <Grid Grid.Row="1" ColumnDefinitions="{OnIdiom Desktop='1*, 8*, 1*', Phone='Auto, *, Auto', Tablet='1*, 8*, 1*', Default='Auto, *, Auto'}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
                 <StackLayout
                             Grid.Column="1"
                             Padding="30,0,30,20"
                             HorizontalOptions="Fill"
                             Spacing="15"                  
-                            VerticalOptions="Center"
+                            VerticalOptions="Center" >
                             
-     >
-                    <Label Text="Họ và Tên"
-                           FontSize="15"
-                           TextColor="{DynamicResource White}"
-                           Margin="10,20,0,0"
-                           HorizontalTextAlignment="Start" />
-                   
-                    <Frame CornerRadius="22" Padding="0">
-                        <Label
-                             Text="{Binding HoTen}"
-                             BackgroundColor="LightGray"
-                             FontSize="18"
-                             HeightRequest="50"
-                             VerticalTextAlignment="Center"
-                             HorizontalTextAlignment="Start"
-                             TextColor="{DynamicResource Black}" />
-                    </Frame>
 
-                    <Label Text="Số điện thoại"
-                           FontSize="15"
-                           TextColor="{DynamicResource White}"
-                           Margin="10,0,0,0"
-                           HorizontalTextAlignment="Start" />
-                    <Frame CornerRadius="22" Padding="0">
-                        <Label
-                            
-                            BackgroundColor="LightGray"                                            
+                    <Frame 
+                            CornerRadius="22"
+                            Padding="0"
+                            BackgroundColor="Transparent"
+                            BorderColor="Transparent"
+                            HasShadow="False">
+                        <Button
+                            BackgroundColor="{DynamicResource Primary35Color}"
+                            BorderColor="{DynamicResource Primary50Color}"
+                            BorderWidth="1.2"                     
+                            CornerRadius="20"
                             FontFamily="MediumFont"
-                            FontSize="18"
-                            HeightRequest="50"    
-                            Text="{Binding Phone}"  
-                            VerticalTextAlignment="Center"
-                            HorizontalTextAlignment="Start"                            
-                            TextColor="{DynamicResource Black}" />
+                            FontSize="16"
+                            HeightRequest="45"
+                            WidthRequest="2000"
+                            Text="Thông tin người dùng"                           
+                            TextColor="{DynamicResource BaseTextColor}"
+                            Clicked ="OnProfileUserClicked"/>
+
                     </Frame>
 
-                    <Label Text="Email"
-                           FontSize="15"
-                           TextColor="{DynamicResource White}"
-                           Margin="10,0,0,0"
-                           HorizontalTextAlignment="Start" />
-                    <Frame CornerRadius="22" Padding="0">
-                        <Label
-                            Text="{Binding Email}"
-                            BackgroundColor="LightGray"
-                            FontSize="18"
-                            HeightRequest="50"
-                            VerticalTextAlignment="Center"                          
-                            HorizontalTextAlignment="Start"
-                            TextColor="{DynamicResource Black}" />
+                    <Frame 
+                            CornerRadius="22"
+                            Padding="0"
+                            BackgroundColor="Transparent"
+                            BorderColor="Transparent"
+                            HasShadow="False">
+                        <Button
+                            BackgroundColor="{DynamicResource Primary35Color}"
+                            BorderColor="{DynamicResource Primary50Color}"
+                            BorderWidth="1.2"                     
+                            CornerRadius="20"
+                            FontFamily="MediumFont"
+                            FontSize="16"
+                            HeightRequest="45"
+                            WidthRequest="2000"
+                            Text="Cập nhật thông tin người dùng"                            
+                            TextColor="{DynamicResource BaseTextColor}"
+                            Clicked ="UpdateProfileUserClicked"/>
                     </Frame>
+                </StackLayout>
+                
+                
+                <StackLayout Grid.Column="1" Grid.Row="1" 
+                 Padding="30,0,30,20"
+                 HorizontalOptions="Fill"
+                 VerticalOptions="End">
+                    <Frame CornerRadius="22"
+               Padding="0"
+               BackgroundColor="Transparent"
+               BorderColor="Transparent"
+               HasShadow="False">
+                        <Button
+                BackgroundColor="{DynamicResource Primary35Color}"
+                BorderColor="{DynamicResource Primary50Color}"
+                BorderWidth="1.2"                     
+                CornerRadius="20"
+                FontFamily="MediumFont"
+                FontSize="14"
+                HeightRequest="40"
+                WidthRequest="200"
+                Text="Đăng xuất"                           
+                TextColor="{DynamicResource BaseTextColor}"
+                Clicked ="OnLogoutClicked"/>
+                    </Frame>
+
                 </StackLayout>
             </Grid>
         </Grid>
-    </Grid>
+    </ScrollView>
 </ContentPage>

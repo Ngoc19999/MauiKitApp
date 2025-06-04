@@ -11,9 +11,15 @@ using PanCardView;
 using FFImageLoading.Maui;
 using RGPopup.Maui.Extensions;
 using MauiKit.Views;
-using MauiKit.Views.Onboardings;
+//using MauiKit.Views.Onboardings;
 using Microsoft.Maui.Controls.Hosting;
 using MyMauiApp.CustomHandlers;
+using MauiKit.Views.DemoApp;
+#if ANDROID
+using MauiKit.Platforms.Android;
+#endif
+
+
 
 #if IOS
 using Plugin.Firebase.Core.Platforms.iOS;
@@ -50,7 +56,7 @@ namespace MauiKit
                 .UseMauiApp<App>()
                 .UseMauiMaps()
                 .RegisterDemoAppServices()
-                .RegisterViewModels()
+                //.RegisterViewModels()
                 .UseMauiCommunityToolkit()
                 .UseMauiCommunityToolkitMediaElement()
                 .UseSkiaSharp()
@@ -80,6 +86,9 @@ namespace MauiKit
                 })
                 .ConfigureMauiHandlers(handlers =>
                 {
+#if ANDROID
+                handlers.AddHandler(typeof(CustomMap), typeof(CustomMapHandler));
+#endif
                     handlers.AddHandler(typeof(ProgressBar), typeof(ProgressBarHandler));
                 })
                 .ConfigureLifecycleEvents(events =>
@@ -192,17 +201,17 @@ namespace MauiKit
                 //Do something with the link
             }
         }
-        public static MauiAppBuilder RegisterViewModels(this MauiAppBuilder mauiAppBuilder)
-        {
-            mauiAppBuilder.Services.AddTransient<MainPage>();
-            mauiAppBuilder.Services.AddTransient<TestPage>();
-            mauiAppBuilder.Services.AddTransient<TestPageViewModel>();
-            mauiAppBuilder.Services.AddTransient<MainViewModel>();
-            mauiAppBuilder.Services.AddTransient<DemoWalkthroughViewModel>();
-            mauiAppBuilder.Services.AddTransient<DemoStartPage>();
-            mauiAppBuilder.Services.AddTransient<DemoWalkthroughPage>();
+        //public static MauiAppBuilder RegisterViewModels(this MauiAppBuilder mauiAppBuilder)
+        //{
+        //    mauiAppBuilder.Services.AddTransient<MainPage>();
+        //    mauiAppBuilder.Services.AddTransient<ProfileUser>();
+        //    mauiAppBuilder.Services.AddTransient<TestPageViewModel>();
+        //    mauiAppBuilder.Services.AddTransient<MainViewModel>();
+        //    mauiAppBuilder.Services.AddTransient<DemoWalkthroughViewModel>();
+        //    mauiAppBuilder.Services.AddTransient<DemoStartPage>();
+        //    mauiAppBuilder.Services.AddTransient<DemoWalkthroughPage>();
 
-            return mauiAppBuilder;
-        }
+        //    return mauiAppBuilder;
+        //}
     }
 }

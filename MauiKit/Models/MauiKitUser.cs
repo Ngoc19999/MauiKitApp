@@ -11,6 +11,7 @@ namespace MauiKit.Models
         public string HoTen { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
+        public string Pass { get; set; }
         public byte Style { get; set; }
     } 
 }

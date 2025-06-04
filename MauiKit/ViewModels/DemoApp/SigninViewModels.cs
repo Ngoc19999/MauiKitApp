@@ -1,6 +1,6 @@
 ﻿using MauiKit.Services;
 using MauiKit.Views.DemoApp;
-using MauiKit.Views.Onboardings;
+//using MauiKit.Views.Onboardings;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -86,14 +86,14 @@ namespace MauiKit.ViewModels.DemoApp
                 if (style == 1) 
                 {
                     // view user
-                    await App.Current.MainPage.Navigation.PushAsync(new MauiKitTabbedPageUser());
+                    App.Current.MainPage = new NavigationPage(new MauiKitTabbedPageUser());
 
                 }
                
                 if (style == 2)
                 {
                     // view kid
-                    await App.Current.MainPage.Navigation.PushAsync(new MauiKitTabbedPage());
+                    App.Current.MainPage = new NavigationPage(new MauiKitTabbedPage());
 
                 }
                 

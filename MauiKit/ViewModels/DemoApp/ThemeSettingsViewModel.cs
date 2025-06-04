@@ -214,7 +214,7 @@ public partial class ThemeSettingsViewModel : ObservableObject
             AppSettings.IsRTLLanguage = false;
         }
 
-        (Application.Current as App).ChangeFlyoutDirection();
+       // (Application.Current as App).ChangeFlyoutDirection();
     }
 
     #endregion Methods
