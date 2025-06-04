@@ -86,9 +86,6 @@ namespace MauiKit
                 })
                 .ConfigureMauiHandlers(handlers =>
                 {
-#if ANDROID
-                handlers.AddHandler(typeof(CustomMap), typeof(CustomMapHandler));
-#endif
                     handlers.AddHandler(typeof(ProgressBar), typeof(ProgressBarHandler));
                 })
                 .ConfigureLifecycleEvents(events =>

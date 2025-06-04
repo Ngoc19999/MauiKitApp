@@ -3,12 +3,8 @@ using Android.Content;
 using Android.Gms.Maps;
 using Android.Gms.Maps.Model;
 using Android.Graphics;
-using MauiKit.Controls;   // Namespace chứa CustomMap
-using MauiKit.Models;      // Namespace chứa CustomMapPin
-using Microsoft.Maui.Controls.Maps;
-using Microsoft.Maui.Handlers;
 using Microsoft.Maui.Maps.Handlers;
-using System;
+
 
 namespace MauiKit.Platforms.Android
 {

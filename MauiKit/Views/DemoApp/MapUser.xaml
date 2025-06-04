@@ -17,7 +17,7 @@
                    HorizontalOptions="Fill"
                    Margin="10"/>
         <!-- Hàng thứ hai dành cho Map -->
-        <controls:CustomMap CustomPins="{Binding Pins}" />
+        <maps:Map x:Name="MyMapUser" MapType="Street" />
          
     </Grid>
 </ContentPage>
