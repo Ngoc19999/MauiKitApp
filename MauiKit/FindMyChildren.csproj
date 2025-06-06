@@ -197,6 +197,12 @@
 		<MauiXaml Update="Controls\Popups\BasePopupPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+		<MauiXaml Update="Views\Auth\OtpVerificationPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Auth\PhoneLoginPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="Views\DemoApp\ForgotPassword.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>

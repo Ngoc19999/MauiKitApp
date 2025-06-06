@@ -28,13 +28,13 @@ public partial class ProfileUser : ContentPage
     {
         // Khi chọn "Thông Tin Cá Nhân", hiển thị khối cá nhân và ẩn khối tài khoản
         AccountInfo.IsVisible = true;
-        Account.IsVisible = false;
+       // Account.IsVisible = false;
     }
     private void BtnChild(object sender, EventArgs e)
     {
         // Khi chọn "Thông Tin Cá Nhân", hiển thị khối cá nhân và ẩn khối tài khoản
         AccountInfo.IsVisible = false;
-        Account.IsVisible = true;
+      //  Account.IsVisible = true;
     }
 
     private async void NameLabel(object sender, EventArgs e)
