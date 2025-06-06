@@ -6,155 +6,235 @@
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
              xmlns:localization="clr-namespace:MauiKit.Resources.Translations"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             BackgroundColor="{DynamicResource BasePageColor}"    
-             NavigationPage.HasBackButton="False"
-             NavigationPage.HasNavigationBar="False"
-             Title="ProfileUser">
+             BackgroundColor="{DynamicResource BasePageColor}"
+             NavigationPage.HasNavigationBar="False">
+
     <ScrollView VerticalScrollBarVisibility="Never">
-        <Grid RowDefinitions="*, Auto">
-
-            <Grid
-            Padding="30"
-            HorizontalOptions="Center"
-            RowDefinitions="Auto, Auto, Auto, Auto, Auto"
-            RowSpacing="10"
-            VerticalOptions="Center"
-            Margin="0,-110,0,0">
-
-                <Border
-                Padding="0"
-                Background="{DynamicResource PrimaryColor}"
-                HeightRequest="80"
-                HorizontalOptions="Center"
-                Shadow="{StaticResource CommonShadow}"
-                StrokeShape="{RoundRectangle CornerRadius=16}"
-                WidthRequest="80">
-
-                    <controls:RoundedCornerImage
-                    Background="{DynamicResource White}"
-                    HeightRequest="60"
-                    HorizontalOptions="Center"
-                    Source="logo.png"
-                    Stroke="{DynamicResource PrimaryColor}"
-                    StrokeShape="{RoundRectangle CornerRadius=30}"
-                    StrokeThickness="1"
-                    VerticalOptions="Center"
-                    WidthRequest="60" />
-                </Border>
-
-                <Label
-                Grid.Row="1"
-                FontFamily="BoldFont"
-                FontSize="20"
-                HorizontalOptions="Center"
-                HorizontalTextAlignment="Center"
-                Style="{StaticResource Title1}"
-                Text="Welcome to"
-                TextColor="{DynamicResource PrimaryColor}" />
-
-                <Grid Grid.Row="2">
-                    <ffimageloading:CachedImage
-                    Aspect="AspectFit"
+        <Grid>
+            <ffimageloading:CachedImage
+                    Aspect="AspectFill"
                     DownsampleToViewSize="True"
-                    HeightRequest="{OnIdiom Phone='170',
-                                            Desktop='350',
-                                            Tablet='230'}"
-                    Source="bg_paint.png"
-                    VerticalOptions="Center" />
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Fill"
+                    Source="bg_prim.png" />
+
+            <!-- Gradient Mask -->
+            <Grid Grid.Row="1" InputTransparent="True">
+                <Grid.Background>
+                    <LinearGradientBrush>
+                        <GradientStop Offset="0.1" Color="{DynamicResource BlackberryGradient}" />
+                        <GradientStop Offset="1.0" Color="{DynamicResource BlackberryGradient}" />
+                    </LinearGradientBrush>
+                </Grid.Background>
+
+                <!-- Logo và Label bên trong Gradient Mask -->
+                <Grid
+                        Padding="30"
+                        HorizontalOptions="Center"
+                        RowDefinitions="Auto, Auto, Auto, Auto, Auto"
+                        RowSpacing="10" 
+                        VerticalOptions="Center"
+                        Margin="0,-300,0,0">
+
+                    <Border
+                        Padding="0"
+                        Background="{DynamicResource Primary35Color}"
+                        HeightRequest="200"
+                        HorizontalOptions="Center"
+                        Shadow="{StaticResource CommonShadow}"
+                        StrokeShape="{RoundRectangle CornerRadius=200}"
+                        WidthRequest="200">
+
+                        <controls:RoundedCornerImage
+                        Background="{DynamicResource White}"
+                        HeightRequest="190"
+                        HorizontalOptions="Center"
+                        Source="logo.png"
+                        Stroke="{DynamicResource PrimaryColor}"
+                        StrokeShape="{RoundRectangle CornerRadius=200}"
+                        StrokeThickness="1"
+                        VerticalOptions="Center"
+                        WidthRequest="190" />
+                    </Border>
 
                     <Label
-                    Margin="0,-5,0,0"
-                    FontAttributes="Bold"
-                    FontSize="30"
-                    HorizontalOptions="Center"
-                    HorizontalTextAlignment="Center"
-                    Style="{StaticResource CustomTitle}"
-                    Text="Find My Children "
-                    TextColor="{DynamicResource BaseTextColor}"
-                    VerticalOptions="Center" />
-
+                                Grid.Row="1"
+                                FontFamily="BoldFont"
+                                FontSize="30"
+                                HorizontalOptions="Center"
+                                HorizontalTextAlignment="Center"
+                                Style="{StaticResource CustomTitle}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Xin chào " TextColor="{DynamicResource Gray200}"/>
+                                <Span Text="{Binding HoTen}" FontAttributes="Bold" TextColor="{DynamicResource AccentColor}"/>
+                                <Span Text=" !!!" TextColor="{DynamicResource AccentColor}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
                 </Grid>
-
             </Grid>
-            <Grid Grid.Row="1" ColumnDefinitions="{OnIdiom Desktop='1*, 8*, 1*', Phone='Auto, *, Auto', Tablet='1*, 8*, 1*', Default='Auto, *, Auto'}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+            <!-- Form thông tin -->
+            <Grid Grid.Row="1" Grid.ZIndex="2" ColumnDefinitions="{OnIdiom Desktop='1*, 8*, 1*', Phone='Auto, *, Auto', Tablet='1*, 8*, 1*', Default='Auto, *, Auto'}">
                 <StackLayout
-                            Grid.Column="1"
-                            Padding="30,0,30,20"
-                            HorizontalOptions="Fill"
-                            Spacing="15"                  
-                            VerticalOptions="Center" >
-                            
-
-                    <Frame 
-                            CornerRadius="22"
-                            Padding="0"
-                            BackgroundColor="Transparent"
-                            BorderColor="Transparent"
-                            HasShadow="False">
+                             Grid.Column="1"                        
+                             Padding="30,0,30,20"
+                             HorizontalOptions="Fill"
+                             Spacing="15"                  
+                             VerticalOptions="Center" >
+                    <StackLayout Orientation="Horizontal" 
+                                 HorizontalOptions="Center" 
+                                 Spacing="20" 
+                                 Margin="0,300,0,0">
                         <Button
-                            BackgroundColor="{DynamicResource Primary35Color}"
-                            BorderColor="{DynamicResource Primary50Color}"
-                            BorderWidth="1.2"                     
-                            CornerRadius="20"
-                            FontFamily="MediumFont"
-                            FontSize="16"
-                            HeightRequest="45"
-                            WidthRequest="2000"
-                            Text="Thông tin người dùng"                           
-                            TextColor="{DynamicResource BaseTextColor}"
-                            Clicked ="OnProfileUserClicked"/>
+                                x:Name="BtnParent_Clicked" 
+                                Text="Thông Tin Cá Nhân"
+                                Clicked=""
+                                FontAttributes="Bold"
+                                Style="{StaticResource Body}"            
+                                BackgroundColor="{DynamicResource Primary10Color}"
+                                TextColor="{DynamicResource Gray200}"
+                                CornerRadius="11" />
+                        <Button 
+                                x:Name="BtnChild"                           
+                                Text="Thông Tin Tài Khoản"
+                                FontAttributes="Bold"
+                                Style="{StaticResource Body}"           
+                                BackgroundColor="{DynamicResource Primary10Color}"
+                                TextColor="{DynamicResource Gray200}"
+                                CornerRadius="11" />
+                    </StackLayout>
+                    <!-- Khối thông tin cá nhân -->
+                    <ContentView x:Name="AccountInfo" IsVisible="False">
+                        <Grid ColumnSpacing="10" RowSpacing="10" VerticalOptions="Center" Margin="0,10,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <!-- Static labels -->
+                            <Label Grid.Row="0" Grid.Column="0" x:Name="Label1" Text="Tên tài khoản :" FontAttributes="Bold" FontFamily="MediumFont" FontSize="16" Margin="-25,0,0,0" VerticalOptions="Center"/>
+                            <Label Grid.Row="1" Grid.Column="0" x:Name="Label2" Text="Ngày sinh :" FontAttributes="Bold" FontFamily="MediumFont" Margin="-25,0,0,0" FontSize="16" VerticalOptions="Center"/>
+                            <Label Grid.Row="2" Grid.Column="0" x:Name="Label3" Text="Địa chỉ :" FontAttributes="Bold" FontFamily="MediumFont" Margin="-25,0,0,0" FontSize="16" VerticalOptions="Center"/>
+                            <!-- Binding labels -->
+                            <Label Grid.Row="0" 
+                               Grid.Column="1" 
+                               Text="{Binding HoTen}" 
+                               FontSize="16" VerticalOptions="Center" 
+                               FontFamily="MediumFont" 
+                               Margin="0,0,0,0"/>
+                            <Label Grid.Row="1" 
+                               Grid.Column="1" 
+                               Text="{Binding NgaySinh, StringFormat='{0:dd/MM/yyyy}'}" 
+                               FontSize="16" VerticalOptions="Center"  
+                               FontFamily="MediumFont" 
+                               Margin="0,0,0,0"/>
+                            <Label Grid.Row="2" 
+                               Grid.Column="1" 
+                               Text="{Binding DiaChi}" 
+                               FontSize="16" 
+                               VerticalOptions="Center" 
+                               FontFamily="MediumFont" 
+                               Margin="0,0,0,0" 
+                               LineBreakMode="TailTruncation" 
+                               MaxLines="1" 
+                               WidthRequest="200"/>
 
-                    </Frame>
+                            <!-- Detail labels -->
+                            <Label Grid.Row="0" Grid.Column="2" Text="Chi tiết" FontAttributes="Bold" FontFamily="MediumFont" FontSize="16" Margin="30,0,0,0" TextColor="{DynamicResource Gray200}" VerticalOptions="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer  Tapped="NameLabel"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <Label Grid.Row="1" Grid.Column="2" Text="Chi tiết" FontAttributes="Bold" FontFamily="MediumFont" FontSize="16" Margin="30,0,0,0" TextColor="{DynamicResource Gray200}" VerticalOptions="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer  Tapped="BirthdayLabel"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <Label Grid.Row="2" Grid.Column="2" Text="Chi tiết" FontAttributes="Bold" FontFamily="MediumFont" FontSize="16" Margin="30,0,0,0" TextColor="{DynamicResource Gray200}" VerticalOptions="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer  Tapped="AddressLabel"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Grid>
+                    </ContentView>
+                    <!-- Khối thông tin tài khoản  -->
+                    <ContentView x:Name="Account" IsVisible="False">
+                        <Grid ColumnSpacing="10" RowSpacing="10" VerticalOptions="Center" Margin="0,10,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <!-- Static labels -->
+                            <Label Grid.Row="0" Grid.Column="0" x:Name="Label1" Text="Số điện thoại :" FontAttributes="Bold" FontFamily="MediumFont" FontSize="16" Margin="-25,0,0,0" VerticalOptions="Center"/>
+                            <Label Grid.Row="1" Grid.Column="0" x:Name="Label2" Text="Email :" FontAttributes="Bold" FontFamily="MediumFont" Margin="-25,0,0,0" FontSize="16" VerticalOptions="Center"/>
+                            <Label Grid.Row="2" Grid.Column="0" x:Name="Label3" Text="Giới tính :" FontAttributes="Bold" FontFamily="MediumFont" Margin="-25,0,0,0" FontSize="16" VerticalOptions="Center"/>
+                            <!-- Binding labels -->
+                            <Label Grid.Row="0" 
+                                   Grid.Column="1" 
+                                   Text="{Binding Phone}" 
+                                   FontSize="16" VerticalOptions="Center" 
+                                   FontFamily="MediumFont" 
+                                   Margin="0,0,0,0"/>
+                            <Label Grid.Row="1" 
+                                   Grid.Column="1" 
+                                   Text="{Binding Email}" 
+                                   FontSize="16" VerticalOptions="Center"  
+                                   FontFamily="MediumFont" 
+                                   Margin="0,0,0,0"/>
+                            <Label Grid.Row="2" 
+                                   Grid.Column="1" 
+                                   Text="{Binding GioiTinh}" 
+                                   FontSize="16" 
+                                   VerticalOptions="Center" 
+                                   FontFamily="MediumFont" 
+                                   Margin="0,0,0,0" 
+                                   LineBreakMode="TailTruncation" 
+                                   MaxLines="1" 
+                                   WidthRequest="200"/>
 
-                    <Frame 
-                            CornerRadius="22"
-                            Padding="0"
-                            BackgroundColor="Transparent"
-                            BorderColor="Transparent"
-                            HasShadow="False">
-                        <Button
-                            BackgroundColor="{DynamicResource Primary35Color}"
-                            BorderColor="{DynamicResource Primary50Color}"
-                            BorderWidth="1.2"                     
-                            CornerRadius="20"
-                            FontFamily="MediumFont"
-                            FontSize="16"
-                            HeightRequest="45"
-                            WidthRequest="2000"
-                            Text="Cập nhật thông tin người dùng"                            
-                            TextColor="{DynamicResource BaseTextColor}"
-                            Clicked ="UpdateProfileUserClicked"/>
-                    </Frame>
-                </StackLayout>
-                
-                
-                <StackLayout Grid.Column="1" Grid.Row="1" 
-                 Padding="30,0,30,20"
-                 HorizontalOptions="Fill"
-                 VerticalOptions="End">
-                    <Frame CornerRadius="22"
-               Padding="0"
-               BackgroundColor="Transparent"
-               BorderColor="Transparent"
-               HasShadow="False">
-                        <Button
-                BackgroundColor="{DynamicResource Primary35Color}"
-                BorderColor="{DynamicResource Primary50Color}"
-                BorderWidth="1.2"                     
-                CornerRadius="20"
-                FontFamily="MediumFont"
-                FontSize="14"
-                HeightRequest="40"
-                WidthRequest="200"
-                Text="Đăng xuất"                           
-                TextColor="{DynamicResource BaseTextColor}"
-                Clicked ="OnLogoutClicked"/>
-                    </Frame>
-
+                            <!-- Detail labels -->
+                            <Label Grid.Row="0" Grid.Column="2" Text="Chi tiết" FontAttributes="Bold" FontFamily="MediumFont" FontSize="16" Margin="30,0,0,0" TextColor="{DynamicResource Gray200}" VerticalOptions="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer  Tapped="NameLabel"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <Label Grid.Row="1" Grid.Column="2" Text="Chi tiết" FontAttributes="Bold" FontFamily="MediumFont" FontSize="16" Margin="30,0,0,0" TextColor="{DynamicResource Gray200}" VerticalOptions="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer  Tapped="BirthdayLabel"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <Label Grid.Row="2" Grid.Column="2" Text="Chi tiết" FontAttributes="Bold" FontFamily="MediumFont" FontSize="16" Margin="30,0,0,0" TextColor="{DynamicResource Gray200}" VerticalOptions="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer  Tapped="AddressLabel"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Grid>
+                    </ContentView>
+                    <Button
+                              VerticalOptions="End"
+                              BackgroundColor="{DynamicResource Primary35Color}"
+                              BorderColor="{DynamicResource Primary50Color}"
+                              Command="{Binding LogoutCommand}"
+                              BorderWidth="1.2"                     
+                              CornerRadius="10"
+                              FontFamily="MediumFont"
+                              FontSize="14"
+                              HeightRequest="40"
+                              WidthRequest="150"
+                              Text="Đăng xuất"
+                              TextColor="{DynamicResource Gray200}" />
                 </StackLayout>
             </Grid>
         </Grid>
