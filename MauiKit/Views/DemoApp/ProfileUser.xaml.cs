@@ -1,5 +1,6 @@
 ﻿using MauiKit.Services;
 using MauiKit.ViewModels.DemoApp;
+using Newtonsoft.Json.Linq;
 
 namespace MauiKit.Views.DemoApp;
 
@@ -18,17 +19,40 @@ public partial class ProfileUser : ContentPage
                                                                  "Đăng xuất",
                                                                  "Hủy");
         if (!confirmed)
-            return;     
+            return;
         UserSession.CurrentUser = null;
         App.Current.MainPage = new NavigationPage(new LoginPage());
     }
-    private async void UpdateProfileUserClicked(object sender, EventArgs e)
+
+    private void BtnParent_Clicked(object sender, EventArgs e)
+    {
+        // Khi chọn "Thông Tin Cá Nhân", hiển thị khối cá nhân và ẩn khối tài khoản
+        AccountInfo.IsVisible = true;
+        Account.IsVisible = false;
+    }
+    private void BtnChild(object sender, EventArgs e)
+    {
+        // Khi chọn "Thông Tin Cá Nhân", hiển thị khối cá nhân và ẩn khối tài khoản
+        AccountInfo.IsVisible = false;
+        Account.IsVisible = true;
+    }
+
+    private async void NameLabel(object sender, EventArgs e)
     {
 
-        await Navigation.PushAsync(new UpdateUser());
+        await DisplayAlert("Popup", "Mở popup cập nhật tài khoản người dùng", "OK");
     }
-    private async void OnProfileUserClicked(object sender, EventArgs e)
+
+    private async void BirthdayLabel(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new UserInfo());
+
+        await DisplayAlert("Popup", "Mở popup cập nhật thông tin người dùng", "OK");
     }
+    private async void AddressLabel(object sender, EventArgs e)
+    {
+
+        await DisplayAlert("Popup", "Mở popup cập nhật thông tin người dùng", "OK");
+    }
+
+    
 }

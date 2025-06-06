@@ -13,5 +13,9 @@ namespace MauiKit.Models
         public string Email { get; set; }
         public string Pass { get; set; }
         public byte Style { get; set; }
-    } 
+        public string? DiaChi { get; set; }
+        public byte GioiTinh { get; set; }
+        public DateTime? NgaySinh { get; set; }
+
+    }
 }

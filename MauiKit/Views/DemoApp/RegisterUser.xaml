@@ -9,20 +9,20 @@
                  NavigationPage.HasNavigationBar="False">
 
         <ScrollView VerticalScrollBarVisibility="Never">
-            <Grid RowDefinitions="Auto, *, Auto">
+        <Grid>
+            <ffimageloading:CachedImage
+                            Aspect="AspectFill"
+                            DownsampleToViewSize="True"
+                            HorizontalOptions="Fill"
+                            VerticalOptions="Fill"
+                            Source="bg_prim.png" />
 
-                <!--Background Image-->
-                <Image Grid.Row="1"
-                   Aspect="Fill"
-                   Opacity="0.5"
-                   Source="bg_purple.png" />
-
-                <!-- Gradient Mask -->
+            <!-- Gradient Mask -->
                 <Grid Grid.Row="1" InputTransparent="True">
                     <Grid.Background>
                         <LinearGradientBrush>
-                            <GradientStop Offset="0.1" Color="{DynamicResource LightGreen}" />
-                            <GradientStop Offset="1.0" Color="{DynamicResource LightGreen}" />
+                        <GradientStop Offset="0.1" Color="{DynamicResource BlackberryGradient}" />
+                        <GradientStop Offset="1.0" Color="{DynamicResource BlackberryGradient}" />
                         </LinearGradientBrush>
                     </Grid.Background>
 
@@ -37,23 +37,23 @@
 
                         <Border
             Padding="0"
-            Background="{DynamicResource PrimaryColor}"
-            HeightRequest="80"
+            Background="{DynamicResource Primary35Color}"
+            HeightRequest="200"
             HorizontalOptions="Center"
             Shadow="{StaticResource CommonShadow}"
-            StrokeShape="{RoundRectangle CornerRadius=16}"
-            WidthRequest="80">
+            StrokeShape="{RoundRectangle CornerRadius=200}"
+            WidthRequest="200">
 
                             <controls:RoundedCornerImage
             Background="{DynamicResource White}"
-            HeightRequest="60"
+            HeightRequest="190"
             HorizontalOptions="Center"
             Source="logo.png"
             Stroke="{DynamicResource PrimaryColor}"
-            StrokeShape="{RoundRectangle CornerRadius=30}"
+            StrokeShape="{RoundRectangle CornerRadius=200}"
             StrokeThickness="1"
             VerticalOptions="Center"
-            WidthRequest="60" />
+            WidthRequest="190" />
                         </Border>
 
                         <Label
@@ -64,7 +64,7 @@
             HorizontalTextAlignment="Center"
             Style="{StaticResource Title1}"
             Text="Đăng Ký Tài Khoản"
-            TextColor="{DynamicResource BaseTextColor}" />
+            TextColor="{DynamicResource Gray200}" />
 
                     </Grid>
                 </Grid>
@@ -76,19 +76,25 @@
              HorizontalOptions="Fill"
              Spacing="15"                  
              VerticalOptions="End" >
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="20" Margin="0,0,0,10">
+                    <StackLayout Orientation="Horizontal" 
+                                 HorizontalOptions="Center" 
+                                 Spacing="20" 
+                                 Margin="-15,0,0,0">
                        
                         <Button
-                    x:Name="BtnParent" Text="Tài khoản bố mẹ"
+                    x:Name="BtnParent" 
+                    Text="Tài khoản bố mẹ"
+                    Style="{StaticResource Title2}"
                     Clicked="OnSelectParentClicked"
-                    BackgroundColor="{DynamicResource PrimaryColor}"
-                    TextColor="{DynamicResource BaseTextColor}"
+                    BackgroundColor="{DynamicResource Primary10Color}"
+                    TextColor="{DynamicResource Gray200}"
                     CornerRadius="11" />
                         <Button 
                     x:Name="BtnChild" Text="Tài khoản con"
+                    Style="{StaticResource Title2}"
                     Clicked="OnSelectChildClicked"
-                    BackgroundColor="{DynamicResource PrimaryColor}"
-                    TextColor="{DynamicResource BaseTextColor}"
+                    BackgroundColor="{DynamicResource Primary10Color}"
+                    TextColor="{DynamicResource Gray200}"
                     CornerRadius="11" />
                     </StackLayout>
                     <Frame CornerRadius="22" Padding="0">
@@ -176,14 +182,14 @@
               HeightRequest="40"
               WidthRequest="150"
               Text="Đăng ký"
-              TextColor="{DynamicResource BaseTextColor}"
+              TextColor="{DynamicResource Gray200}"
               Clicked ="OnRegisterClicked" />
                         <Label 
                 Text="Đã có tài khoản? Đăng nhập ngay"
                 FontFamily="MediumFont"
                 FontSize="14"
                 HorizontalOptions="Center"
-                TextColor="{DynamicResource BaseTextColor}">
+                TextColor="{DynamicResource Gray200}">
                             <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnLoginTapped"/>
                             </Label.GestureRecognizers>

@@ -2,6 +2,7 @@
 
 using CoreLocation;
 using MapKit;
+using MauiMaps.Services;
 using Microsoft.Maui.Maps;
 using Microsoft.Maui.Maps.Handlers;
 using Microsoft.Maui.Maps.Platform;

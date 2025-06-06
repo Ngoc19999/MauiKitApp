@@ -1,13 +1,5 @@
 ﻿using MauiKit.Services;
 using MauiKit.Views.DemoApp;
-//using MauiKit.Views.Onboardings;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
 
