@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiKit.Views.Auth.OtpVerificationPage"
+             Title="OtpVerificationPage">
+    <VerticalStackLayout Padding="30" Spacing="20" VerticalOptions="Center">
+        <Label Text="Nhập mã OTP được gửi về điện thoại:" FontSize="18" />
+        <Entry Placeholder="6 chữ số" Keyboard="Numeric" Text="{Binding OtpCode}" MaxLength="6" />
+        <Button Text="Xác nhận" Command="{Binding VerifyOtpCommand}" />
+    </VerticalStackLayout>
+</ContentPage>
