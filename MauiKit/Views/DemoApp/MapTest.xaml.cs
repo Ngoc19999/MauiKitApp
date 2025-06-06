@@ -1,4 +1,6 @@
-﻿using Microsoft.Maui.Controls.Maps;
+﻿using MauiMaps;
+using MauiMaps.Services;
+using Microsoft.Maui.Controls.Maps;
 using Microsoft.Maui.Maps;
 
 namespace MauiKit.Views.DemoApp;
@@ -7,17 +9,18 @@ public partial class MapTest : ContentPage
 {
 	public MapTest()
 	{
-		InitializeComponent();
-
-        var pin = new Pin
+        InitializeComponent();
+        var customPin = new CustomPin
         {
-            Label = "Vị trí của tôi",
-            Location = new Location(21.0285, 105.8542), 
-            Type = PinType.Place
-
+            Label = "Vị trí tùy chỉnh",
+            Address = "123 Đường ABC",
+            Type = PinType.Generic,
+            // Ví dụ: tọa độ của Hà Nội
+            Location = new Location(21.0278, 105.8342),
+            // Đảm bảo file ảnh "custom_pin.png" có trong Resources/Images và được cấu hình đúng
+            ImageSource = ImageSource.FromFile("call.png")
         };
-
-        MyMap.Pins.Add(pin);
-        MyMap.MoveToRegion(MapSpan.FromCenterAndRadius(pin.Location, Distance.FromKilometers(1)));
+        MyMap.Pins.Add(customPin);
+        MyMap.MoveToRegion(MapSpan.FromCenterAndRadius(customPin.Location, Distance.FromKilometers(1)));
     }
 }

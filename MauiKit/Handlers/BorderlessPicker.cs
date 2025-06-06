@@ -1,5 +1,5 @@
 ﻿namespace MauiKit.Handlers;
-public class BorderlessPicker: Picker
+public class BorderlessPicker : Picker
 {
 
 }

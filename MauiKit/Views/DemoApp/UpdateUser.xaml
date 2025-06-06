@@ -73,15 +73,19 @@
 
 
             </Grid>
-            <Grid Grid.Row="1" Grid.ZIndex="2" ColumnDefinitions="{OnIdiom Desktop='1*, 8*, 1*', Phone='Auto, *, Auto', Tablet='1*, 8*, 1*', Default='Auto, *, Auto'}">
+            <Grid Grid.Row="1" 
+                  Grid.ZIndex="2" 
+                  ColumnDefinitions="{OnIdiom Desktop='1*, 8*, 1*', Phone='Auto, *, Auto', Tablet='1*, 8*, 1*', Default='Auto, *, Auto'}">
                 <StackLayout
                           Grid.Column="1"                        
                           Padding="30,0,30,20"
                           HorizontalOptions="Fill"
                           Spacing="15"                  
                           VerticalOptions="End" >
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="20" Margin="0,0,0,10">
-
+                    <StackLayout Orientation="Horizontal"
+                                 HorizontalOptions="Center" 
+                                 Spacing="20"
+                                 Margin="0,0,0,10">
                     </StackLayout>
                     <Frame CornerRadius="22" Padding="0">
 

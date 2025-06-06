@@ -1,4 +1,4 @@
-﻿namespace MauiMaps;
+﻿namespace MauiMaps.Services;
 
 using Microsoft.Maui.Controls.Maps;
 

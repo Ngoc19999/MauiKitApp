@@ -17,7 +17,6 @@
                    HorizontalOptions="Fill"
                    Margin="10"/>
         <!-- Hàng thứ hai dành cho Map -->
-        <maps:Map x:Name="MyMapUser" MapType="Street" />
-         
+        <maps:Map  Grid.Row="2"  x:Name="MyMapUser" MapType="Street" />
     </Grid>
 </ContentPage>

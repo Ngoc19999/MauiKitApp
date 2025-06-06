@@ -5,6 +5,7 @@ using Android.Gms.Maps;
 using Android.Gms.Maps.Model;
 using Android.Graphics;
 using Android.Graphics.Drawables;
+using MauiMaps.Services;
 using Microsoft.Maui.Maps;
 using Microsoft.Maui.Maps.Handlers;
 using Microsoft.Maui.Platform;
@@ -85,7 +86,7 @@ public class CustomMapHandler : MapHandler
 	}
 
 	private void AddMarker(GoogleMap map, IMapPin pin, MarkerOptions markerOption)
-	{
+	{	
 		var marker = map.AddMarker(markerOption);
 		pin.MarkerId = marker.Id;
 		Markers.Add((pin, marker));

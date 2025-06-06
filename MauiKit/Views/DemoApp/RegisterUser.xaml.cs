@@ -17,16 +17,16 @@ public partial class RegisterUser : ContentPage
     private void OnSelectParentClicked(object sender, EventArgs e)
     {
         _accountType = "parent";
-        BtnParent.BackgroundColor = (Color)Application.Current.Resources["PrimaryColor"];
-        BtnChild.BackgroundColor = Color.FromHex("#808080");
+        BtnParent.BackgroundColor = (Color)Application.Current.Resources["ComplementColor"];
+        BtnChild.BackgroundColor = (Color)Application.Current.Resources["Primary10Color"];
     }
 
     // Xử lý sự kiện chọn tài khoản con
     private void OnSelectChildClicked(object sender, EventArgs e)
     {
         _accountType = "child";
-        BtnChild.BackgroundColor = (Color)Application.Current.Resources["PrimaryColor"];
-        BtnParent.BackgroundColor = Color.FromHex("#808080");
+        BtnChild.BackgroundColor = (Color)Application.Current.Resources["ComplementColor"];
+        BtnParent.BackgroundColor = (Color)Application.Current.Resources["Primary10Color"];
     }
     private async void OnRegisterClicked(object sender, EventArgs e)
     {
