@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "554122447716",
+    "project_id": "findmychildren",
+    "storage_bucket": "findmychildren.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:554122447716:android:ac31da0df25bbc1bd74871",
+        "android_client_info": {
+          "package_name": "com.realtech.findmychildren"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "554122447716-pimkb3gkr9h4b0vkue958j3jfkvokfn4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.realtech.findmychildren",
+            "certificate_hash": "b6f1461b927d2ff47ecfc52f37413e449603cc09"
+          }
+        },
+        {
+          "client_id": "554122447716-gk2hhc6ms5micuhtskir295nki8nqtsj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcuYZeN7JQhaC9vmTIWjDhhJ3fQUbeVHc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "554122447716-gk2hhc6ms5micuhtskir295nki8nqtsj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "554122447716-a5d97f6mpeevglpocms5e07j2cjvu54a.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.realtech.findmychildren"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

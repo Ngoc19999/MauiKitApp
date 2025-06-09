@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiKit.Views.HomeFamilyPage"
+             Title="HomeFamilyPage">
+    <VerticalStackLayout Padding="20" Spacing="16">
+        <Label Text="Danh sách người thân đang theo dõi:" FontSize="18" FontAttributes="Bold" />
+
+        <CollectionView x:Name="FollowersList" ItemsSource="{Binding FollowingList}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Padding="12" Margin="4">
+                        <HorizontalStackLayout>
+                            <Image Source="{Binding PhotoUrl}" WidthRequest="40" HeightRequest="40" />
+                            <Label Text="{Binding Name}" FontSize="16" Margin="10,0,0,0" />
+                            <Button Text="Xem bản đồ" Command="{Binding ShowMapCommand}" CommandParameter="{Binding Id}" />
+                        </HorizontalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>

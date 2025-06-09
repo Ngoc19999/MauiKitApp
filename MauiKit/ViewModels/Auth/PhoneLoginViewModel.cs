@@ -1,4 +1,5 @@
-﻿using Plugin.Firebase.Auth;
+﻿using MauiKit.Views.Auth;
+using Plugin.Firebase.Auth;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace MauiKit.ViewModels.Auth
             try
             {
                 await _auth.VerifyPhoneNumberAsync(PhoneNumber);
-                await Shell.Current.GoToAsync("OtpVerificationPage");
+                await Shell.Current.Navigation.PushAsync(new OtpVerificationPage());
             }
             catch (Exception ex)
             {

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiKit.Views.HomeCouplePage"
+             Title="HomeCouplePage">
+    <VerticalStackLayout Padding="30" Spacing="20" VerticalOptions="Center">
+        <Image Source="{Binding Lover.PhotoUrl}" WidthRequest="120" HeightRequest="120" />
+        <Label Text="{Binding Lover.Name}" FontSize="24" HorizontalOptions="Center" />
+        <Button Text="Xem vị trí trên bản đồ" Command="{Binding ShowMapCommand}" />
+    </VerticalStackLayout>
+</ContentPage>

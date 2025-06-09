@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiKit.Views.LocationMapPage"
+             xmlns:mauiMaps="clr-namespace:MauiMaps.Services"
+             xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
+             Title="LocationMapPage">
+    <VerticalStackLayout>
+        <maps:Map x:Name="map"
+          IsShowingUser="True"
+          IsTrafficEnabled="True"
+                  HeightRequest="400"
+                  
+          ItemsSource="{Binding UserMarkers}"
+          IsZoomEnabled="True">
+            <maps:Map.ItemTemplate>
+                <DataTemplate>
+                    <mauiMaps:CustomPin Location="{Binding Location}"
+                                Address="{Binding Address}"
+                                Label="{Binding Label}"
+                                Type="Place" />
+                </DataTemplate>
+            </maps:Map.ItemTemplate>
+        </maps:Map>
+        <Label Text="{Binding TargetUserName}" FontSize="20" HorizontalOptions="Center" />
+        <Label Text="{Binding LastUpdated}" FontSize="14" HorizontalOptions="Center" />
+    </VerticalStackLayout>
+</ContentPage>

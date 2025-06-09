@@ -8,6 +8,14 @@ using System.Threading.Tasks;
 
 namespace MauiKit.Models
 {
+    public class LocationMarker
+    {
+        public string UserId { get; set; }
+        public string Name { get; set; }
+        public string PhotoUrl { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+    }
     public class UserModel: IFirestoreObject
     {
         [FirestoreDocumentId] // Gán Document ID từ Firestore
@@ -21,6 +29,13 @@ namespace MauiKit.Models
 
         [FirestoreProperty("phone")]
         public string Phone { get; set; }
+
+        [FirestoreProperty("address")]
+        public string Address { get; set; }
+
+        
+        [FirestoreProperty("fcmToken")]
+        public string FcmToken { get; set; }
 
         [FirestoreProperty("photoUrl")]
         public string PhotoUrl { get; set; }

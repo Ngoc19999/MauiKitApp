@@ -58,6 +58,7 @@
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
 
+
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-windows10.0.19041.0|AnyCPU'">
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
@@ -67,6 +68,10 @@
 		<AndroidUseAapt2>True</AndroidUseAapt2>
 		<AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
 		<JavaMaximumHeapSize>2G</JavaMaximumHeapSize>
+
+		<AndroidLinkMode>SdkOnly</AndroidLinkMode>
+		<AndroidEnableProguard>true</AndroidEnableProguard>
+		<AndroidLinkTool>r8</AndroidLinkTool>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-android|AnyCPU'">
@@ -171,8 +176,7 @@
 
 	<ItemGroup Condition="$(TargetFramework.Contains('-android'))">
 		<AndroidResource Include="Platforms\Android\Resources\**" TargetPath="%(RecursiveDir)%(Filename)%(Extension)" />
-		
-		<GoogleServicesJson Include="google-services.json"></GoogleServicesJson>
+		<GoogleServicesJson Include="Platforms\Android\google-services.json"></GoogleServicesJson>
 	</ItemGroup>
 
 	<ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
@@ -191,6 +195,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<MauiXaml Update="AppShell.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="Controls\ButtonLoading\ButtonLoading.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
@@ -201,6 +208,9 @@
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\Auth\PhoneLoginPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Auth\RegisterProfilePage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\DemoApp\ForgotPassword.xaml">
@@ -242,6 +252,21 @@
 		<MauiXaml Update="Views\DemoApp\UserInfo.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+		<MauiXaml Update="Views\FollowingListPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\HomeCouplePage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\HomeFamilyPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\LocationMapPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\OnboardingPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="Views\Samples\SamplePageOne.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
@@ -250,6 +275,9 @@
 		</MauiXaml>
 		<MauiXaml Update="Views\Samples\SamplePageTwo.xaml">
 			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\SettingsPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 	</ItemGroup>
 

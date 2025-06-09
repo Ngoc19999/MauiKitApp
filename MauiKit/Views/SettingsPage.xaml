@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiKit.Views.SettingsPage"
+             Title="SettingsPage">
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="20">
+
+            <!-- Avatar + Thông tin người dùng -->
+            <Border Stroke="LightGray"
+                    BackgroundColor="#f0f0f0"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 12"
+                    Padding="16">
+                <HorizontalStackLayout Spacing="16">
+                    <Image Source="{Binding AvatarUrl}"
+                           WidthRequest="60"
+                           HeightRequest="60"
+                           Aspect="AspectFill" />
+                    <VerticalStackLayout VerticalOptions="Center">
+                        <Label Text="{Binding DisplayName}"
+                               FontSize="18"
+                               FontAttributes="Bold" />
+                        <Label Text="{Binding PhoneNumber}"
+                               FontSize="14"
+                               TextColor="Gray" />
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+            </Border>
+
+            <Label Text="{Binding UserID}" FontSize="16" />
+
+            <!-- Cập nhật thông tin cá nhân -->
+            <Border Stroke="Transparent"
+                    StrokeShape="RoundRectangle 8"
+                    BackgroundColor="#e0f7fa"
+                    Padding="12">
+                <Label Text="👤 Cập nhật thông tin cá nhân"
+                       FontSize="16" />
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavigateToUpdateProfileCommand}" />
+                </Border.GestureRecognizers>
+            </Border>
+
+            <!-- Chọn lại loại dịch vụ -->
+            <Border Stroke="Transparent"
+                    StrokeShape="RoundRectangle 8"
+                    BackgroundColor="#fff3e0"
+                    Padding="12">
+                <Label Text="🔄 Chọn lại loại dịch vụ"
+                       FontSize="16" />
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavigateToOnboardingCommand}" />
+                </Border.GestureRecognizers>
+            </Border>
+
+            <!-- Danh sách người đang theo dõi -->
+            <Border Stroke="Transparent"
+                    StrokeShape="RoundRectangle 8"
+                    BackgroundColor="#fce4ec"
+                    Padding="12">
+                <Label Text="👥 Danh sách người đang theo dõi"
+                       FontSize="16" />
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavigateToFollowingListCommand}" />
+                </Border.GestureRecognizers>
+            </Border>
+
+            <!-- Đăng xuất -->
+            <BoxView HeightRequest="1" BackgroundColor="LightGray" Margin="0,20" />
+
+            <Button Text="🚪 Đăng xuất"
+                    TextColor="Red"
+                    Command="{Binding LogoutCommand}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
