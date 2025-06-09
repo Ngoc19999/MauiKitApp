@@ -12,12 +12,9 @@ using Microsoft.Maui.Controls.Compatibility.Platform.Android;
 using UIKit;
 #endif
 
-using LiveChartsCore;
-using LiveChartsCore.SkiaSharpView;
-using SkiaSharp;
+
 using MauiKit.Handlers;
-//using MauiKit.Views.Onboardings;
-using MauiKit.Views.DemoApp;
+using Plugin.Firebase.Auth;
 
 
 
@@ -25,6 +22,9 @@ namespace MauiKit
 {
     public partial class App : Application
     {
+        private readonly IFirebaseAuth _auth;
+        private readonly Services.FirebaseNotificationService _notificationService = new();
+
         public App()
         {
             InitializeComponent();
@@ -95,15 +95,17 @@ namespace MauiKit
 
             #endregion
 
+            _auth = CrossFirebaseAuth.Current;
+
+            _notificationService.Initialize();
+
+            MainPage = new AppShell();
+
             if (AppSettings.IsFirstLaunching)
             {
                 AppSettings.IsFirstLaunching = true; //Set to 'false' in production
-                MainPage = new NavigationPage(new LoginPage());
             }
-        //    else
-        //    {
-        //        MainPage = GetMainPage();   
-        //    }
+
         }
 
         //public static Page GetMainPage()
@@ -125,10 +127,27 @@ namespace MauiKit
         //        flyoutPage.FlowDirection = FlowDirection.LeftToRight;
         //    }
         //}
+        private async Task CheckAuthStateAsync()
+        {
+            var user = _auth.CurrentUser;
+            if (user != null)
+            {
+                // Đã đăng nhập → điều hướng đúng vai trò
+                var appShell = MainPage as AppShell;
+                await appShell.NavigateAfterLoginAsync(user.Uid);
+            }
+            else
+            {
+                // Chưa đăng nhập → vào trang đăng nhập
+                await Shell.Current.GoToAsync("//PhoneLoginPage");
+            }
+        }
 
-        protected override void OnStart()
+        protected override async void OnStart()
         {
             base.OnStart();
+
+            await CheckAuthStateAsync();
 
             var appLanguageCode = string.Empty;
             if (AppSettings.SelectedLanguageItem == null)
@@ -172,8 +191,8 @@ namespace MauiKit
 
             ThemeUtil.ApplyColorSet(AppSettings.SelectedPrimaryColorIndex);
 
-            LiveCharts.Configure(config =>
-                config
+            //LiveCharts.Configure(config =>
+            //    config
                     // you can override the theme 
                     //.AddDarkTheme()  
 
@@ -191,14 +210,14 @@ namespace MauiKit
                     // https://livecharts.dev/docs/maui/2.0.0-rc2/Overview.Mappers
 
                     // here we use the index as X, and the population as Y 
-                    .HasMap<City>((city, index) => new(index, city.Population))
+                    //.HasMap<City>((city, index) => new(index, city.Population))
             // .HasMap<Foo>( .... ) 
             // .HasMap<Bar>( .... ) 
-            );
+            //);
 
         }
 
-        public record City(string Name, double Population);
+      //  public record City(string Name, double Population);
 
     }
 }

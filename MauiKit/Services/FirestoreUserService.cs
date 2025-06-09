@@ -13,24 +13,69 @@ namespace MauiKit.Services
             _firestore = CrossFirebaseFirestore.Current;
         }
 
-        public async Task CreateUserDocumentAsync(string uid,string PhotoUrl, string name, string email,string Phone)
+        public async Task<bool> AddFollowingAsync(string myUid, string targetUid)
         {
-            var user = new UserModel
-            {
-                Name = name,
-                Email = email,
-                Phone = Phone,
-                Followers = new(),
-                Following = new(),
-                PhotoUrl = PhotoUrl, // hoặc avatar mặc định
-                Location = null,
-                Role = null
-            };
+            var docRef =  _firestore.GetCollection("users").GetDocument(myUid);
+            var snapshot = await docRef.GetDocumentSnapshotAsync<UserModel>();
+            if (snapshot.Data == null) return false;
 
-            await CrossFirebaseFirestore.Current
-                .GetCollection("users")
-                .GetDocument(uid)
-                .GetDocumentSnapshotAsync<UserModel>();
+            var currentFollowing = snapshot.Data.Following;
+            if (!currentFollowing.Contains(targetUid))
+            {
+                currentFollowing.Add(targetUid);
+                await docRef.UpdateDataAsync(("following", currentFollowing));
+                return true;
+            }
+
+            return false;
+        }
+
+        public async Task RemoveFollowingAsync(string myUid, string targetUid)
+        {
+            var docRef = CrossFirebaseFirestore.Current
+                .GetCollection("users").GetDocument(myUid);
+
+            var snapshot = await docRef.GetDocumentSnapshotAsync<UserModel>();
+            if (snapshot.Data==null) return;
+
+            var currentFollowing = snapshot.Data.Following;
+            if (currentFollowing.Contains(targetUid))
+            {
+                currentFollowing.Remove(targetUid);
+                await docRef.UpdateDataAsync(("following", currentFollowing));
+            }
+        }
+        public async Task<string> CreateUserDocumentAsync(string uid,string PhotoUrl, string name, string email,string Phone, string Address)
+        {
+            try
+            {
+                var user = new UserModel
+                {
+                    Name = name,
+                    Email = email,
+                    Phone = Phone,
+                    Address = Address,
+                    Followers = new(),
+                    Following = new(),
+                    PhotoUrl = PhotoUrl, // hoặc avatar mặc định
+                    Location = null,
+                    Role = null
+                };
+
+                await CrossFirebaseFirestore.Current
+                   .GetCollection("users")
+                   .GetDocument(uid)
+                   .SetDataAsync(user);
+
+                return "Đăng ký thành công";
+            }
+            catch (Exception ex)
+            {
+                // Xử lý lỗi nếu cần
+                return $"Lỗi khi tạo tài khoản: {ex.Message}";
+            }   
+            
+
         }
         public async Task<List<UserModel>> GetFollowingUsersAsync()
         {

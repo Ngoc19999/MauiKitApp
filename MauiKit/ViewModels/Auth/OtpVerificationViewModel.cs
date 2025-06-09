@@ -27,13 +27,14 @@ namespace MauiKit.ViewModels.Auth
             {
                 var result = await _auth.SignInWithPhoneNumberVerificationCodeAsync(OtpCode);
                 var uid = result.Uid;
+                var tokenService = new FirebaseNotificationService();
 
                 // Tạo user document Firestore nếu chưa có
                 if (!await _firestoreService.UserExistsAsync(uid))
                 {
-                    await _firestoreService.CreateUserDocumentAsync(uid, result.PhotoUrl, result.DisplayName, result.Email, result.ProviderInfos.FirstOrDefault()?.PhoneNumber?? phone);
+                    await _firestoreService.CreateUserDocumentAsync(uid, result.PhotoUrl, result.DisplayName, result.Email, result.ProviderInfos.FirstOrDefault()?.PhoneNumber?? phone,"");
                 }
-
+                await tokenService.RegisterFcmTokenAsync();
                 await Shell.Current.GoToAsync("//OnboardingPage");
             }
             catch (Exception ex)

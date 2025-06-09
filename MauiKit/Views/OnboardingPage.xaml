@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiKit.Views.OnboardingPage"
+             Title="OnboardingPage">
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="24"
+            Spacing="24"
+            VerticalOptions="Center">
+            <Label
+                Text="Bạn muốn sử dụng ứng dụng để làm gì?"
+                FontSize="22"
+                FontAttributes="Bold"
+                HorizontalOptions="Center" />
+            <!-- Family option -->
+
+            <Border Stroke="Gray" StrokeThickness="1" 
+                BackgroundColor="LightBlue"
+                Padding="16">
+                <VerticalStackLayout>
+                    <Label Text="👨‍👩‍👧‍👦 Tôi là phụ huynh / gia đình"
+                           FontSize="18"
+                           FontAttributes="Bold" />
+                    <Label Text="Theo dõi con cái, ông bà, đảm bảo an toàn"
+                           FontSize="14" />
+                </VerticalStackLayout>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectFamilyCommand}" />
+                </Border.GestureRecognizers>
+            </Border>
+
+            <Border
+                BackgroundColor="LightPink"
+                Padding="16">
+                <VerticalStackLayout>
+                    <Label Text="❤️ Tôi là cặp đôi / người yêu"
+                           FontSize="18"
+                           FontAttributes="Bold" />
+                    <Label Text="Xem vị trí nhau, kết nối yêu thương"
+                           FontSize="14" />
+                </VerticalStackLayout>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectCoupleCommand}" />
+                </Border.GestureRecognizers>
+            </Border>
+
+            <!--<Border
+                BackgroundColor="LightGray"
+                Padding="16"
+                GestureRecognizers="{Binding SelectFamilyCommand}">
+                <VerticalStackLayout>
+                    <Label Text="🏢 Tôi là doanh nghiệp"
+                           FontSize="18"
+                           FontAttributes="Bold" />
+                    <Label Text="Theo dõi nhân viên, quản lý phương tiện"
+                           FontSize="14" />
+                </VerticalStackLayout>
+            </Border>-->
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

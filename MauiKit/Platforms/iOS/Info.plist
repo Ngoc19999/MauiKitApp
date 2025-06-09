@@ -103,5 +103,13 @@
 	<string>1.6.4</string>
 	<key>CFBundleVersion</key>
 	<string>21</string>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<true/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>App dùng quyền thông báo để gửi tin nhắn quan trọng</string>
 </dict>
 </plist>

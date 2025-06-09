@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Shell
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="MauiKit.AppShell"
+    xmlns:viewsAuth="clr-namespace:MauiKit.Views.Auth"
+    xmlns:views="clr-namespace:MauiKit.Views"
+    Shell.FlyoutBehavior="Disabled">
+
+    <ShellContent Route="PhoneLoginPage" ContentTemplate="{DataTemplate viewsAuth:PhoneLoginPage}" />
+    <ShellContent Route="OtpVerificationPage" ContentTemplate="{DataTemplate viewsAuth:OtpVerificationPage}" />
+    <ShellContent Route="RegisterProfilePage" ContentTemplate="{DataTemplate viewsAuth:RegisterProfilePage}" />
+    <ShellContent Route="OnboardingPage" ContentTemplate="{DataTemplate views:OnboardingPage}" />
+    <ShellContent Route="HomeFamilyPage" ContentTemplate="{DataTemplate views:HomeFamilyPage}" />
+    <ShellContent Route="FollowingListPage" ContentTemplate="{DataTemplate views:FollowingListPage}" />
+    <TabBar >
+        <ShellContent Route="LocationMapPage" Title="Map">
+            <views:LocationMapPage />
+        </ShellContent>
+        <ShellContent Route="HomeCouplePage" Title="Settings">
+            <views:SettingsPage />
+        </ShellContent>
+    </TabBar>
+    <!-- Onboarding -->
+    <!--<ShellContent
+        Route="OnboardingPage"
+        ContentTemplate="{DataTemplate views:OnboardingPage}" />-->
+    <!-- Family Home -->
+    <!--<ShellContent
+        Route="HomeFamilyPage"
+        ContentTemplate="{DataTemplate views:HomeFamilyPage}" />
+
+    --><!-- Couple Home --><!--
+    <ShellContent
+        Route="HomeCouplePage"
+        ContentTemplate="{DataTemplate views:HomeCouplePage}" />
+
+    --><!-- Business Home --><!--
+    <ShellContent
+        Route="HomeBusinessPage"
+        ContentTemplate="{DataTemplate views:HomeBusinessPage}" />
+
+    --><!-- Shared Pages --><!--
+    <ShellContent
+        Route="LocationMapPage"
+        ContentTemplate="{DataTemplate views:LocationMapPage}" />
+
+    <ShellContent
+        Route="SettingsPage"
+        ContentTemplate="{DataTemplate views:SettingsPage}" />-->
+
+</Shell>

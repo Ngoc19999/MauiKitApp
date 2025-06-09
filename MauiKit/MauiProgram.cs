@@ -16,6 +16,7 @@ using MauiMaps;
 using Microsoft.Maui.Controls.Hosting;
 using MyMauiApp.CustomHandlers;
 using MauiKit.Views.DemoApp;
+using MauiKit.Services;
 #if ANDROID
 
 
@@ -164,6 +165,49 @@ namespace MauiKit
 
             builder.Services.AddLocalization();
 
+            builder.Services.AddSingleton<LocationUpdaterService>();
+
+            // Bắt lifecycle: khi app chạy, khởi động định vị nền
+            builder.ConfigureLifecycleEvents(events =>
+            {
+#if ANDROID
+            events.AddAndroid(android => android
+                .OnStart((activity) =>
+                {
+                    var updater = new LocationUpdaterService();
+                    Device.StartTimer(TimeSpan.FromMinutes(1), () =>
+                    {
+                        MainThread.BeginInvokeOnMainThread(async () =>
+                        {
+                            await updater.UpdateLocationAsync();
+                        });
+
+                        return true;
+                    });
+                }));
+#endif
+
+#if IOS
+            events.AddiOS(ios => ios
+                .FinishedLaunching((app, dict) =>
+                {
+                    var updater = new LocationUpdaterService();
+                    Device.StartTimer(TimeSpan.FromMinutes(1), () =>
+                    {
+                        MainThread.BeginInvokeOnMainThread(async () =>
+                        {
+                            await updater.UpdateLocationAsync();
+                        });
+
+                        return true;
+                    });
+
+                    return true;
+                }));
+#endif
+            });
+
+
             var app = builder.Build();
 
             return app;
@@ -186,7 +230,7 @@ namespace MauiKit
                 {
                     CrossFirebase.Initialize(activity);
                     FirebaseAnalyticsImplementation.Initialize(activity);
-                    FirebaseAuthGoogleImplementation.Initialize("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"); /*webclient thuelai project*/
+                    FirebaseAuthGoogleImplementation.Initialize("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"); /*webclient findmychildrens project*/
                 }));
 #endif
             });
